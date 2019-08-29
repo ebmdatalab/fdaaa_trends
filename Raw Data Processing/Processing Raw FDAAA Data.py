@@ -40,7 +40,8 @@ from programs.data_functions import fda_reg
 from programs.final_df import make_dataframe
 
 # +
-old_fda = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/fdaaa_regulatory_snapshot.csv'
+#old_fda = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/fdaaa_regulatory_snapshot.csv'
+old_fda = '/Users/nicholasdevito/Dropbox/fdaaa_analysis_data/fdaaa_regulatory_snapshot.csv'
 fda_reg_dict = fda_reg(old_fda)
 
 headers = ['nct_id', 'act_flag', 'included_pact_flag', 'results_due', 'has_results','pending_results', 'pending_data',
@@ -58,8 +59,15 @@ scrape_dates = [date(2018,3,15), date(2018,4,16), date(2018,5,15), date(2018,6,1
                 date(2019,2,15), date(2019,3,15), date(2019,4,15), date(2019,5,15),date(2019,6,7)]
 
 regexp = re.compile('\d{4}-\d{2}-\d{2}')
-path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/'
+
+#These paths need to point to the raw ClinicalTrials.gov data for the relevant dates. These files are 3-4 GB in size and
+#therefore cannot easily be shared. Any raw data for any dates held by our team can be shared upon request.
+
+#path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/'
+#path = '/Users/nicholasdevito/Desktop/fdaaa analysis'
 files = os.listdir(path)
+files.sort()
+files.remove('.DS_Store')
 
 reported_by_month_all = []
 reported_by_month_on_time = []
@@ -78,5 +86,7 @@ for file, scrape_date in zip(tqdm(files), scrape_dates):
 end_program = time()
 print("This took {} Minutes to Run".format((end_program - start_program) / 60))
 # -
+
+files
 
 

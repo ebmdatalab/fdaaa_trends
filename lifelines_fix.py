@@ -55,7 +55,7 @@ def remove_ticks(ax, x=False, y=False):
         ax.yaxis.set_ticks_position("none")
     return ax
 
-def add_at_risk_counts(x, *fitters, **kwargs):
+def add_at_risk_counts(x, *fitters, position=-0.15, **kwargs):
     """
     Add counts showing how many individuals were at risk at each time point in
     survival/hazard plots.
@@ -113,7 +113,7 @@ def add_at_risk_counts(x, *fitters, **kwargs):
     ax2 = plt.twiny(ax=ax)
     # Move the ticks below existing axes
     # Appropriate length scaled for 6 inches. Adjust for figure size.
-    ax2_ypos = -0.15 * 6.0 / fig.get_figheight()
+    ax2_ypos = position * 6.0 / fig.get_figheight()
     move_spines(ax2, ["bottom"], [ax2_ypos])
     # Hide all fluff
     remove_spines(ax2, ["top", "right", "bottom", "left"])

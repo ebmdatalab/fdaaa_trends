@@ -88,10 +88,6 @@ tab contains_genetic
 tab contains_us_loc
 tab quartile
 
-* new table looking only at results reporting status
-tab any_results overdue
-tab any_results reported_late
-
 * table 2 results % 
 tab compliant, missing
 proportion compliant, missing cformat(%5.3f) 

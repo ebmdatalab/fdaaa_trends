@@ -1,0 +1,276 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. import delimited "fdaaa_stata_dataset.csv"
+{res}{text}(31 vars, 20,386 obs)
+
+{com}. save bigworking, replace
+{txt}file bigworking.dta saved
+
+{com}. 
+. 
+. use bigworking
+{txt}
+{com}. 
+. * labels
+. label define noyes 0 "no" 1 "yes"
+{txt}
+{com}. label values results_due noyes
+{txt}
+{com}. label values any_results noyes
+{txt}
+{com}. label values overdue noyes
+{txt}
+{com}. label values reported_late noyes
+{txt}
+{com}. label values industry_collab noyes
+{txt}
+{com}. label values us_gov_collab noyes
+{txt}
+{com}. label values terminated noyes
+{txt}
+{com}. label values full_completion noyes
+{txt}
+{com}. label values contains_drug noyes
+{txt}
+{com}. label values contains_biological noyes
+{txt}
+{com}. label values contains_device noyes
+{txt}
+{com}. label values contains_diagnostic noyes
+{txt}
+{com}. label values contains_radiation noyes
+{txt}
+{com}. label values contains_combi_product noyes
+{txt}
+{com}. label values contains_genetic noyes
+{txt}
+{com}. label define sponsorclasslabels 0 "noncommercial" 1 "commercial" 2 "us_gov"
+{txt}
+{com}. label values sponsor_class sponsorclasslabels
+{txt}
+{com}. label define phaselabels 0 "Phase 1/2" 1 "Phase 2" 2 "Phase 2/3" 3 "Phase 3" 4 "Phase 4" 5 "N/A"
+{txt}
+{com}. label values phase_cat phaselabels
+{txt}
+{com}. label define usloclabels 0 "US-Only" 1 "US and Other" 2 "No US Location" 3 "No Location Provided"
+{txt}
+{com}. label values contains_us_loc usloclabels
+{txt}
+{com}. 
+. gen compliant = 0
+{txt}
+{com}. replace compliant = 1 if results_due == 1 & any_results == 1 & reported_late == 0
+{txt}(1,392 real changes made)
+
+{com}. 
+. label values compliant noyes
+{txt}
+{com}. 
+. * identify trials done by institutions that do a lot of trials
+. sort sponsored_trials
+{txt}
+{com}. xtile quartile = sponsored_trials, nq(4)
+{txt}
+{com}. xtile decile = sponsored_trials, nq(10)
+{txt}
+{com}. bysort quartile: summ sponsored_trials
+
+{txt}{hline}
+-> quartile = 1
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      5,110    4.275734     3.22074          1         12
+
+{txt}{hline}
+-> quartile = 2
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      5,113    80.51594    65.13691         13        221
+
+{txt}{hline}
+-> quartile = 3
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      5,167    505.5998    183.5354        222        896
+
+{txt}{hline}
+-> quartile = 4
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      4,996    1732.632    648.9911        901       3263
+
+{txt}
+{com}. bysort decile: summ sponsored_trials
+
+{txt}{hline}
+-> decile = 1
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,084    1.394914    .4889495          1          2
+
+{txt}{hline}
+-> decile = 2
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,084     4.65643    1.413535          3          7
+
+{txt}{hline}
+-> decile = 3
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,004     13.6492    4.314426          8         22
+
+{txt}{hline}
+-> decile = 4
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      1,990    42.49196    15.12242         23         75
+
+{txt}{hline}
+-> decile = 5
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,061    149.9292    44.83604         76        221
+
+{txt}{hline}
+-> decile = 6
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,081    332.6506    58.58766        222        423
+
+{txt}{hline}
+-> decile = 7
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,016    532.3666    67.12905        425        662
+
+{txt}{hline}
+-> decile = 8
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,021     881.141    119.5894        672       1088
+
+{txt}{hline}
+-> decile = 9
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      2,132    1467.411    245.6126       1108       1867
+
+{txt}{hline}
+-> decile = 10
+
+    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+sponsored_~s {c |}{res}      1,913    2401.389    474.1581       1874       3263
+
+{txt}
+{com}. 
+. save working, replace
+{txt}file working.dta saved
+
+{com}. 
+. * YOU NOW HAVE A DATASET READY TO DESCRIBE
+.  
+. * Creating Analysis Dataset
+. * This dataset contains all trials identified as covered under the FDAAA 2007, due or not
+. count
+  {res}20,386
+{txt}
+{com}. 
+. * keep only trials where results are due
+. keep if results_due==1
+{txt}(16,964 observations deleted)
+
+{com}. count
+  {res}3,422
+{txt}
+{com}. save duecohort, replace
+{txt}file duecohort.dta saved
+
+{com}. 
+. *safety net to make sure you now reload data!
+. clear all
+{txt}
+{com}. 
+. * Now the tables
+. clear all
+{txt}
+{com}. use duecohort
+{txt}
+{com}. 
+. count
+  {res}3,422
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. tab sponsor_type contains_us_loc
+
+{txt}sponsor_ty {c |}               contains_us_loc
+        pe {c |}   US-Only  US and Ot  No US Loc  No Locati {c |}     Total
+{hline 11}{c +}{hline 44}{c +}{hline 10}
+  Industry {c |}{res}       758        645         94         34 {txt}{c |}{res}     1,531 
+{txt}       NIH {c |}{res}        94         21          0          0 {txt}{c |}{res}       115 
+{txt}     Other {c |}{res}     1,544         59         91         41 {txt}{c |}{res}     1,735 
+{txt}  U.S. Fed {c |}{res}        40          1          0          0 {txt}{c |}{res}        41 
+{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
+     Total {c |}{res}     2,436        726        185         75 {txt}{c |}{res}     3,422 
+
+
+{com}. tab sponsor_class contains_us_loc
+
+              {txt}{c |}               contains_us_loc
+sponsor_class {c |}   US-Only  US and Ot  No US Loc  No Locati {c |}     Total
+{hline 14}{c +}{hline 44}{c +}{hline 10}
+noncommercial {c |}{res}     1,544         59         91         41 {txt}{c |}{res}     1,735 
+{txt}   commercial {c |}{res}       758        645         94         34 {txt}{c |}{res}     1,531 
+{txt}       us_gov {c |}{res}       134         22          0          0 {txt}{c |}{res}       156 
+{txt}{hline 14}{c +}{hline 44}{c +}{hline 10}
+        Total {c |}{res}     2,436        726        185         75 {txt}{c |}{res}     3,422 
+
+
+{com}. tab sponsor_class sponsored_trials
+{err}too many values
+{txt}{search r(134), local:r(134);}
+
+{com}. tab sponsor_class quartile
+
+              {txt}{c |}       4 quantiles of sponsored_trials
+sponsor_class {c |}         1          2          3          4 {c |}     Total
+{hline 14}{c +}{hline 44}{c +}{hline 10}
+noncommercial {c |}{res}       373        395        581        386 {txt}{c |}{res}     1,735 
+{txt}   commercial {c |}{res}       536        520        187        288 {txt}{c |}{res}     1,531 
+{txt}       us_gov {c |}{res}         9         24         15        108 {txt}{c |}{res}       156 
+{txt}{hline 14}{c +}{hline 44}{c +}{hline 10}
+        Total {c |}{res}       918        939        783        782 {txt}{c |}{res}     3,422 
+
+
+{com}. tab quartile
+
+{txt}4 quantiles {c |}
+         of {c |}
+sponsored_t {c |}
+      rials {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}        918       26.83       26.83
+{txt}          2 {c |}{res}        939       27.44       54.27
+{txt}          3 {c |}{res}        783       22.88       77.15
+{txt}          4 {c |}{res}        782       22.85      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      3,422      100.00
+
+{com}. exit, clear

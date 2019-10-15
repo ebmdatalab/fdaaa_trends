@@ -63,7 +63,7 @@ scrape_dates = [date(2018,3,15), date(2018,4,16), date(2018,5,15), date(2018,6,1
 regexp = re.compile('\d{4}-\d{2}-\d{2}')
 
 #These paths need to point to the raw ClinicalTrials.gov data for the relevant dates. These files are 3-4 GB in size and
-#therefore cannot easily be shared. They are available at https://osf.io/x8nbv/
+#therefore cannot easily be shared. They are available at https://osf.io/x8nbv/?view_only=bb862b2519224d2b92d5f166d290103b
 path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/'
 files = os.listdir(path)
 files.sort()
@@ -71,8 +71,6 @@ files.sort()
 #removing hidden file when analysis is on a Mac
 if '.DS_Store' in files:
     files.remove('.DS_Store')
-
-files = [files[-1]]
 
 file_number = 0
 for file, scrape_date in zip(tqdm(files), scrape_dates):

@@ -4,7 +4,7 @@ You process these using the "Raw Data Processing" directory. These then produce 
 
 The "FDAAA Trends Noteboook - Final" notebook contains all the analysis for the paper conducted in Python.
 
-The STATA Analysis directory contains code to prepare the raw data specifically for analysis in STATA as well as all STATA files for the analysis.
+The "STATA Analysis" directory contains code to prepare the raw data specifically for analysis in STATA as well as all STATA files for the analysis.
 
 "fdaaa_regulatory_snapshot.csv" is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identificaiton logic.
 

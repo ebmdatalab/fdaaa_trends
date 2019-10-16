@@ -15,6 +15,7 @@ The "STATA Analysis" directory contains code to prepare the raw data specificall
 The "Programs" directory contains helper programs for processing and analyzing the data.
 
 Full code for the FDAAA TrialsTracker is available at the following repositories:
+
 https://github.com/ebmdatalab/clinicaltrials-act-tracker
 
 https://github.com/ebmdatalab/clinicaltrials-act-converter

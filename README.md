@@ -13,3 +13,8 @@ The "STATA Analysis" directory contains code to prepare the raw data specificall
 "lifelines_fix.py" applied some cosmetic fixes to the Kaplan-Meier curves generated using the Lifelines Modules.
 
 The "Programs" directory contains helper programs for processing and analyzing the data.
+
+Full code for the FDAAA TrialsTracker is available at the following repositories:
+https://github.com/ebmdatalab/clinicaltrials-act-tracker
+
+https://github.com/ebmdatalab/clinicaltrials-act-converter

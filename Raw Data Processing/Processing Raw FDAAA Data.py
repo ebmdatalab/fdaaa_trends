@@ -59,12 +59,11 @@ scrape_dates = [date(2018,3,15), date(2018,4,16), date(2018,5,15), date(2018,6,1
                 date(2019,2,15), date(2019,3,15), date(2019,4,15), date(2019,5,15),date(2019,6,13), date(2019,7,15), 
                 date(2019,8,15), date(2019,9,16)]
 
-
 regexp = re.compile('\d{4}-\d{2}-\d{2}')
 
 #These paths need to point to the raw ClinicalTrials.gov data for the relevant dates. These files are 3-4 GB in size and
 #therefore cannot easily be shared. They are available at https://osf.io/x8nbv/?view_only=bb862b2519224d2b92d5f166d290103b
-path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/'
+path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON' #change this to the appropriate path on your system
 files = os.listdir(path)
 files.sort()
 
@@ -81,3 +80,8 @@ for file, scrape_date in zip(tqdm(files), scrape_dates):
     df.to_csv('applicable_trials_' + name + '.csv')  
 end_program = time()
 print("This took {} Minutes to Run".format((end_program - start_program) / 60))
+# -
+
+
+
+

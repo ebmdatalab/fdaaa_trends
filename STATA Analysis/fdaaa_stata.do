@@ -68,7 +68,7 @@ use duecohort
 
 count
 
-* table 1
+* table 2
 tab compliant
 tab any_results
 tab sponsor_class

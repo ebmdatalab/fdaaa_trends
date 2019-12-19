@@ -36,8 +36,8 @@ sys.path.append(parent)
 from programs.data_functions import fda_reg
 from programs.data_functions import get_data
 
-old_fda = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/fdaaa_regulatory_snapshot.csv'
-path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/clinicaltrials_raw_clincialtrials_json_2019-06-07.csv'
+old_fda = 'C:/Users/ndevito/Dropbox/Python projects/FDAAA Projects/FDAAA Trends Paper/fdaaa_regulatory_snapshot.csv'
+path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
 
 fda_reg_dict = fda_reg(old_fda)
 lines = get_data(path)
@@ -52,7 +52,7 @@ headers = ['nct_id', 'results_due', 'has_results', 'pending_results', 'any_resul
 from programs.make_stata_data import make_row
 from programs.make_stata_data import make_dataframe
 
-df = make_dataframe(tqdm(lines), fda_reg_dict, headers, act_filter = False, scrape_date = date(2019,6,7))
+df = make_dataframe(tqdm(lines), fda_reg_dict, headers, act_filter = False, scrape_date = date(2019,9,16))
 
 group = df[['nct_id', 'sponsor']].groupby('sponsor', as_index = False).count()
 group.columns = ['sponsor', 'sponsored_trials']

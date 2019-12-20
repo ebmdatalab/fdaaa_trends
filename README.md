@@ -8,6 +8,8 @@ The "STATA Analysis" directory contains code to prepare the raw data specificall
 
 The "Figures" directory contains .svg and .eps versions of the figures used for the paper.
 
+"Peer Review Additions" contains some additional statistics and analysis added to the paper at the request of peer reviewers.
+
 "fdaaa_regulatory_snapshot.csv" is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identificaiton logic.
 
 "qa.csv" is our scrape of QC data used for QC data prior to it being made available in the public XML data.

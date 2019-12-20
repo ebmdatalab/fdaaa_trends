@@ -6,6 +6,8 @@ The "FDAAA Trends Noteboook - Final" notebook contains all the analysis for the 
 
 The "STATA Analysis" directory contains code to prepare the raw data specifically for analysis in STATA as well as all STATA files for the analysis.
 
+The "Figures" directory contains .svg and .eps versions of the figures used for the paper.
+
 "fdaaa_regulatory_snapshot.csv" is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identificaiton logic.
 
 "qa.csv" is our scrape of QC data used for QC data prior to it being made available in the public XML data.

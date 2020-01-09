@@ -23,3 +23,5 @@ Full code for the FDAAA TrialsTracker is available at the following repositories
 https://github.com/ebmdatalab/clinicaltrials-act-tracker
 
 https://github.com/ebmdatalab/clinicaltrials-act-converter
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3603491.svg)](https://doi.org/10.5281/zenodo.3603491)

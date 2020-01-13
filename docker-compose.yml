@@ -1,0 +1,9 @@
+version: "3"
+services:
+  datascience-notebook:
+    image: jupyter/minimal-notebook:177037d09156
+    volumes:
+      - /Users/carolinemorton/Documents/ebmdatalab/fdaaa_trends
+    ports:
+      - 8888:8888
+    container_name: fdaaa_trends-container

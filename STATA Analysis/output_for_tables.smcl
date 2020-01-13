@@ -5,19 +5,37 @@
 {res}{text}(31 vars, 21,525 obs)
 
 {com}. save bigworking, replace
-{txt}(note: file bigworking.dta not found)
-file bigworking.dta saved
+{txt}file bigworking.dta saved
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/hs/p44k4brj1dx6w_hc5mpbv7nc0000gn/T//SD43934.000000"
+{txt}
+{com}. *housekeeping
+. clear all
+{res}{txt}
+{com}. 
+. cd "/Users/carolinemorton/Documents/ebmdatalab/fdaaa_trends/STATA Analysis"
+{res}/Users/carolinemorton/Documents/ebmdatalab/fdaaa_trends/STATA Analysis
+{txt}
+{com}. set more off
+{txt}
+{com}. capture log using output_for_tables, replace
+{txt}
+{com}. 
+. import delimited "fdaaa_stata_dataset.csv"
+{res}{text}(31 vars, 21,525 obs)
+
+{com}. save bigworking, replace
+{txt}file bigworking.dta saved
 
 {com}. 
 . 
 . use bigworking
 {txt}
 {com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\ndevito\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. * labels
+. * labels
 . label define noyes 0 "no" 1 "yes"
 {txt}
 {com}. label values results_due noyes
@@ -185,8 +203,7 @@ sponsored_~s {c |}{res}      1,981    2425.376    469.1983       1898       3276
 {txt}
 {com}. 
 . save working, replace
-{txt}(note: file working.dta not found)
-file working.dta saved
+{txt}file working.dta saved
 
 {com}. 
 . * YOU NOW HAVE A DATASET READY TO DESCRIBE
@@ -205,17 +222,16 @@ file working.dta saved
   {res}4,209
 {txt}
 {com}. save duecohort, replace
-{txt}(note: file duecohort.dta not found)
-file duecohort.dta saved
+{txt}file duecohort.dta saved
 
 {com}. 
 . *safety net to make sure you now reload data!
 . clear all
-{txt}
+{res}{txt}
 {com}. 
 . * Now the tables
 . clear all
-{txt}
+{res}{txt}
 {com}. use duecohort
 {txt}
 {com}. 
@@ -429,35 +445,7 @@ sponsored_t {c |}
       Total {c |}{res}      4,209      100.00
 {txt}
 {com}. 
-. * new table looking only at results reporting status
-. tab any_results overdue
-
-{txt}any_result {c |}        overdue
-         s {c |}        no        yes {c |}     Total
-{hline 11}{c +}{hline 22}{c +}{hline 10}
-        no {c |}{res}         0      1,523 {txt}{c |}{res}     1,523 
-{txt}       yes {c |}{res}     2,686          0 {txt}{c |}{res}     2,686 
-{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
-     Total {c |}{res}     2,686      1,523 {txt}{c |}{res}     4,209 
-
-{txt}
-{com}. tab any_results reported_late
-
-{txt}any_result {c |}     reported_late
-         s {c |}        no        yes {c |}     Total
-{hline 11}{c +}{hline 22}{c +}{hline 10}
-        no {c |}{res}     1,523          0 {txt}{c |}{res}     1,523 
-{txt}       yes {c |}{res}     1,722        964 {txt}{c |}{res}     2,686 
-{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
-     Total {c |}{res}     3,245        964 {txt}{c |}{res}     4,209 
-
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\ndevito\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. * table 2 results % 
+. * table 2 results % 
 . tab compliant, missing
 
   {txt}compliant {c |}      Freq.     Percent        Cum.
@@ -472,6 +460,7 @@ sponsored_t {c |}
 {txt}Proportion estimation{col 35}Number of obs{col 51}= {res}     4,209
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}compliant    {txt}{c |}
@@ -509,7 +498,6 @@ start_year {c |}        no        yes {c |}     Total
 {txt}      2018 {c |}{res}        84         42 {txt}{c |}{res}       126 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(start_year) missing cformat(%5.3f) 
 {res}
@@ -542,6 +530,7 @@ start_year {c |}        no        yes {c |}     Total
          {txt}2018: start_year = {res}2018
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -549,48 +538,48 @@ start_year {c |}        no        yes {c |}     Total
 {txt}{space 8}1994 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}        .{col 37}{space 5}        .{col 51}{space 3}        .
 {txt}{space 8}1997 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}        .{col 37}{space 5}        .{col 51}{space 3}        .
 {txt}{space 8}1998 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}    0.000{col 37}{space 5}        .{col 51}{space 3}        .
-{txt}{space 8}1999 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.333{col 37}{space 5}    0.096{col 51}{space 3}    0.974
+{txt}{space 8}1999 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.272{col 37}{space 5}    0.153{col 51}{space 3}    0.957
 {txt}{space 8}2002 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}    0.000{col 37}{space 5}        .{col 51}{space 3}        .
 {txt}{space 8}2003 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}    0.000{col 37}{space 5}        .{col 51}{space 3}        .
-{txt}{space 8}2004 {c |}{col 14}{res}{space 2}    0.545{col 26}{space 2}    0.157{col 37}{space 5}    0.257{col 51}{space 3}    0.806
-{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.647{col 26}{space 2}    0.119{col 37}{space 5}    0.397{col 51}{space 3}    0.836
-{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.741{col 26}{space 2}    0.086{col 37}{space 5}    0.543{col 51}{space 3}    0.873
-{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.636{col 26}{space 2}    0.105{col 37}{space 5}    0.418{col 51}{space 3}    0.810
-{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.545{col 26}{space 2}    0.076{col 37}{space 5}    0.397{col 51}{space 3}    0.686
-{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.559{col 26}{space 2}    0.061{col 37}{space 5}    0.439{col 51}{space 3}    0.672
-{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.578{col 26}{space 2}    0.052{col 37}{space 5}    0.473{col 51}{space 3}    0.676
+{txt}{space 8}2004 {c |}{col 14}{res}{space 2}    0.545{col 26}{space 2}    0.150{col 37}{space 5}    0.268{col 51}{space 3}    0.797
+{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.647{col 26}{space 2}    0.116{col 37}{space 5}    0.404{col 51}{space 3}    0.832
+{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.741{col 26}{space 2}    0.084{col 37}{space 5}    0.547{col 51}{space 3}    0.871
+{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.636{col 26}{space 2}    0.103{col 37}{space 5}    0.423{col 51}{space 3}    0.807
+{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.545{col 26}{space 2}    0.075{col 37}{space 5}    0.399{col 51}{space 3}    0.685
+{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.559{col 26}{space 2}    0.060{col 37}{space 5}    0.440{col 51}{space 3}    0.672
+{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.578{col 26}{space 2}    0.052{col 37}{space 5}    0.474{col 51}{space 3}    0.675
 {txt}{space 8}2011 {c |}{col 14}{res}{space 2}    0.647{col 26}{space 2}    0.041{col 37}{space 5}    0.563{col 51}{space 3}    0.723
 {txt}{space 8}2012 {c |}{col 14}{res}{space 2}    0.536{col 26}{space 2}    0.033{col 37}{space 5}    0.472{col 51}{space 3}    0.600
 {txt}{space 8}2013 {c |}{col 14}{res}{space 2}    0.598{col 26}{space 2}    0.025{col 37}{space 5}    0.548{col 51}{space 3}    0.646
 {txt}{space 8}2014 {c |}{col 14}{res}{space 2}    0.541{col 26}{space 2}    0.022{col 37}{space 5}    0.497{col 51}{space 3}    0.584
-{txt}{space 8}2015 {c |}{col 14}{res}{space 2}    0.583{col 26}{space 2}    0.017{col 37}{space 5}    0.548{col 51}{space 3}    0.617
+{txt}{space 8}2015 {c |}{col 14}{res}{space 2}    0.583{col 26}{space 2}    0.017{col 37}{space 5}    0.549{col 51}{space 3}    0.617
 {txt}{space 8}2016 {c |}{col 14}{res}{space 2}    0.561{col 26}{space 2}    0.016{col 37}{space 5}    0.529{col 51}{space 3}    0.592
 {txt}{space 8}2017 {c |}{col 14}{res}{space 2}    0.651{col 26}{space 2}    0.017{col 37}{space 5}    0.617{col 51}{space 3}    0.683
-{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.042{col 37}{space 5}    0.580{col 51}{space 3}    0.744
+{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.042{col 37}{space 5}    0.580{col 51}{space 3}    0.743
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 8}1991 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
 {space 8}1994 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
 {space 8}1997 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
 {space 8}1998 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
-{space 8}1999 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.333{col 37}{space 5}    0.026{col 51}{space 3}    0.904
+{space 8}1999 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.272{col 37}{space 5}    0.043{col 51}{space 3}    0.847
 {txt}{space 8}2002 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
 {space 8}2003 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
-{space 8}2004 {c |}{col 14}{res}{space 2}    0.455{col 26}{space 2}    0.157{col 37}{space 5}    0.194{col 51}{space 3}    0.743
-{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.353{col 26}{space 2}    0.119{col 37}{space 5}    0.164{col 51}{space 3}    0.603
-{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.259{col 26}{space 2}    0.086{col 37}{space 5}    0.127{col 51}{space 3}    0.457
-{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.364{col 26}{space 2}    0.105{col 37}{space 5}    0.190{col 51}{space 3}    0.582
-{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.455{col 26}{space 2}    0.076{col 37}{space 5}    0.314{col 51}{space 3}    0.603
-{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.441{col 26}{space 2}    0.061{col 37}{space 5}    0.328{col 51}{space 3}    0.561
-{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.422{col 26}{space 2}    0.052{col 37}{space 5}    0.324{col 51}{space 3}    0.527
+{space 8}2004 {c |}{col 14}{res}{space 2}    0.455{col 26}{space 2}    0.150{col 37}{space 5}    0.203{col 51}{space 3}    0.732
+{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.353{col 26}{space 2}    0.116{col 37}{space 5}    0.168{col 51}{space 3}    0.596
+{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.259{col 26}{space 2}    0.084{col 37}{space 5}    0.129{col 51}{space 3}    0.453
+{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.364{col 26}{space 2}    0.103{col 37}{space 5}    0.193{col 51}{space 3}    0.577
+{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.455{col 26}{space 2}    0.075{col 37}{space 5}    0.315{col 51}{space 3}    0.601
+{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.441{col 26}{space 2}    0.060{col 37}{space 5}    0.328{col 51}{space 3}    0.560
+{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.422{col 26}{space 2}    0.052{col 37}{space 5}    0.325{col 51}{space 3}    0.526
 {txt}{space 8}2011 {c |}{col 14}{res}{space 2}    0.353{col 26}{space 2}    0.041{col 37}{space 5}    0.277{col 51}{space 3}    0.437
 {txt}{space 8}2012 {c |}{col 14}{res}{space 2}    0.464{col 26}{space 2}    0.033{col 37}{space 5}    0.400{col 51}{space 3}    0.528
 {txt}{space 8}2013 {c |}{col 14}{res}{space 2}    0.402{col 26}{space 2}    0.025{col 37}{space 5}    0.354{col 51}{space 3}    0.452
 {txt}{space 8}2014 {c |}{col 14}{res}{space 2}    0.459{col 26}{space 2}    0.022{col 37}{space 5}    0.416{col 51}{space 3}    0.503
-{txt}{space 8}2015 {c |}{col 14}{res}{space 2}    0.417{col 26}{space 2}    0.017{col 37}{space 5}    0.383{col 51}{space 3}    0.452
+{txt}{space 8}2015 {c |}{col 14}{res}{space 2}    0.417{col 26}{space 2}    0.017{col 37}{space 5}    0.383{col 51}{space 3}    0.451
 {txt}{space 8}2016 {c |}{col 14}{res}{space 2}    0.439{col 26}{space 2}    0.016{col 37}{space 5}    0.408{col 51}{space 3}    0.471
 {txt}{space 8}2017 {c |}{col 14}{res}{space 2}    0.349{col 26}{space 2}    0.017{col 37}{space 5}    0.317{col 51}{space 3}    0.383
-{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.042{col 37}{space 5}    0.256{col 51}{space 3}    0.420
+{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.042{col 37}{space 5}    0.257{col 51}{space 3}    0.420
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab sponsor_class compliant
@@ -603,7 +592,6 @@ noncommercial {c |}{res}     1,441        737 {txt}{c |}{res}     2,178
 {txt}       us_gov {c |}{res}       133         61 {txt}{c |}{res}       194 
 {txt}{hline 14}{c +}{hline 22}{c +}{hline 10}
         Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(sponsor_class) missing cformat(%5.3f) 
 {res}
@@ -617,6 +605,7 @@ noncommercial {c |}{res}     1,441        737 {txt}{c |}{res}     2,178
        {txt}us_gov: sponsor_class = {res}us_gov
 
 {txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 15}{c |}{col 38}             L{col 52}ogit
 {col 1}         Over{col 15}{c |} Proportion{col 27}   Std. Err.{col 39}     [95% Con{col 52}f. Interval]
 {hline 14}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no            {txt}{c |}
@@ -639,7 +628,6 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
 {txt}       yes {c |}{res}       405        310 {txt}{c |}{res}       715 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(industry_collab) missing cformat(%5.3f) 
 {res}
@@ -652,6 +640,7 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
           {txt}yes: industry_collab = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -672,7 +661,6 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
 {txt}       yes {c |}{res}       281        180 {txt}{c |}{res}       461 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(us_gov_collab) missing cformat(%5.3f) 
 {res}
@@ -685,6 +673,7 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
           {txt}yes: us_gov_collab = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -709,7 +698,6 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
 {txt}       N/A {c |}{res}       771        333 {txt}{c |}{res}     1,104 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(phase_cat) missing cformat(%5.3f) 
 {res}
@@ -726,12 +714,13 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
     {txt}_subpop_6: phase_cat = {res}N/A
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.642{col 26}{space 2}    0.027{col 37}{space 5}    0.589{col 51}{space 3}    0.692
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.567{col 26}{space 2}    0.014{col 37}{space 5}    0.541{col 51}{space 3}    0.594
-{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.596{col 26}{space 2}    0.050{col 37}{space 5}    0.496{col 51}{space 3}    0.688
+{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.596{col 26}{space 2}    0.049{col 37}{space 5}    0.497{col 51}{space 3}    0.688
 {txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.447{col 26}{space 2}    0.018{col 37}{space 5}    0.411{col 51}{space 3}    0.482
 {txt}{space 3}_subpop_5 {c |}{col 14}{res}{space 2}    0.597{col 26}{space 2}    0.020{col 37}{space 5}    0.557{col 51}{space 3}    0.635
 {txt}{space 3}_subpop_6 {c |}{col 14}{res}{space 2}    0.698{col 26}{space 2}    0.014{col 37}{space 5}    0.671{col 51}{space 3}    0.725
@@ -739,7 +728,7 @@ noncommercial {c |}{col 15}{res}{space 2}    0.338{col 27}{space 2}    0.010{col
 {res}yes          {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.358{col 26}{space 2}    0.027{col 37}{space 5}    0.308{col 51}{space 3}    0.411
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.433{col 26}{space 2}    0.014{col 37}{space 5}    0.406{col 51}{space 3}    0.459
-{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.404{col 26}{space 2}    0.050{col 37}{space 5}    0.312{col 51}{space 3}    0.504
+{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.404{col 26}{space 2}    0.049{col 37}{space 5}    0.312{col 51}{space 3}    0.503
 {txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.553{col 26}{space 2}    0.018{col 37}{space 5}    0.518{col 51}{space 3}    0.589
 {txt}{space 3}_subpop_5 {c |}{col 14}{res}{space 2}    0.403{col 26}{space 2}    0.020{col 37}{space 5}    0.365{col 51}{space 3}    0.443
 {txt}{space 3}_subpop_6 {c |}{col 14}{res}{space 2}    0.302{col 26}{space 2}    0.014{col 37}{space 5}    0.275{col 51}{space 3}    0.329
@@ -754,7 +743,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       362        301 {txt}{c |}{res}       663 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(terminated) missing cformat(%5.3f)
 {res}
@@ -767,6 +755,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: terminated = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -787,7 +776,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}     2,264      1,547 {txt}{c |}{res}     3,811 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(full_completion) missing cformat(%5.3f)
 {res}
@@ -800,6 +788,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: full_completion = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -820,7 +809,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}     1,648      1,320 {txt}{c |}{res}     2,968 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_drug) missing cformat(%5.3f)
 {res}
@@ -833,6 +821,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_drug = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -853,7 +842,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       189        180 {txt}{c |}{res}       369 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_biological) missing cformat(%5.3f)
 {res}
@@ -866,6 +854,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_biological = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -886,7 +875,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       706        314 {txt}{c |}{res}     1,020 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_device) missing cformat(%5.3f)
 {res}
@@ -899,6 +887,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_device = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -919,7 +908,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}        18          7 {txt}{c |}{res}        25 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_diagnostic) missing cformat(%5.3f)
 {res}
@@ -932,15 +920,16 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_diagnostic = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.590{col 26}{space 2}    0.008{col 37}{space 5}    0.575{col 51}{space 3}    0.605
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.720{col 26}{space 2}    0.092{col 37}{space 5}    0.513{col 51}{space 3}    0.862
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.720{col 26}{space 2}    0.090{col 37}{space 5}    0.518{col 51}{space 3}    0.860
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.410{col 26}{space 2}    0.008{col 37}{space 5}    0.395{col 51}{space 3}    0.425
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.280{col 26}{space 2}    0.092{col 37}{space 5}    0.138{col 51}{space 3}    0.487
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.280{col 26}{space 2}    0.090{col 37}{space 5}    0.140{col 51}{space 3}    0.482
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_radiation compliant
@@ -952,7 +941,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}        69         34 {txt}{c |}{res}       103 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_radiation) missing cformat(%5.3f)
 {res}
@@ -965,15 +953,16 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_radiation = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.589{col 26}{space 2}    0.008{col 37}{space 5}    0.574{col 51}{space 3}    0.604
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.670{col 26}{space 2}    0.047{col 37}{space 5}    0.573{col 51}{space 3}    0.754
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.670{col 26}{space 2}    0.046{col 37}{space 5}    0.574{col 51}{space 3}    0.754
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.411{col 26}{space 2}    0.008{col 37}{space 5}    0.396{col 51}{space 3}    0.426
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.330{col 26}{space 2}    0.047{col 37}{space 5}    0.246{col 51}{space 3}    0.427
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.330{col 26}{space 2}    0.046{col 37}{space 5}    0.246{col 51}{space 3}    0.426
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_combi_product compliant
@@ -986,7 +975,6 @@ ombi_produ {c |}       compliant
 {txt}       yes {c |}{res}        11          2 {txt}{c |}{res}        13 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_combi_product) missing cformat(%5.3f)
 {res}
@@ -999,15 +987,16 @@ ombi_produ {c |}       compliant
           {txt}yes: contains_combi_product = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.590{col 26}{space 2}    0.008{col 37}{space 5}    0.575{col 51}{space 3}    0.605
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.846{col 26}{space 2}    0.104{col 37}{space 5}    0.534{col 51}{space 3}    0.964
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.846{col 26}{space 2}    0.100{col 37}{space 5}    0.549{col 51}{space 3}    0.961
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.410{col 26}{space 2}    0.008{col 37}{space 5}    0.395{col 51}{space 3}    0.425
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.154{col 26}{space 2}    0.104{col 37}{space 5}    0.036{col 51}{space 3}    0.466
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.154{col 26}{space 2}    0.100{col 37}{space 5}    0.039{col 51}{space 3}    0.451
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_genetic compliant
@@ -1019,7 +1008,6 @@ ombi_produ {c |}       compliant
 {txt}       yes {c |}{res}         7          4 {txt}{c |}{res}        11 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_genetic) missing cformat(%5.3f)
 {res}
@@ -1032,15 +1020,16 @@ ombi_produ {c |}       compliant
           {txt}yes: contains_genetic = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.591{col 26}{space 2}    0.008{col 37}{space 5}    0.576{col 51}{space 3}    0.606
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.636{col 26}{space 2}    0.152{col 37}{space 5}    0.325{col 51}{space 3}    0.864
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.636{col 26}{space 2}    0.145{col 37}{space 5}    0.339{col 51}{space 3}    0.857
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.409{col 26}{space 2}    0.008{col 37}{space 5}    0.394{col 51}{space 3}    0.424
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.364{col 26}{space 2}    0.152{col 37}{space 5}    0.136{col 51}{space 3}    0.675
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.364{col 26}{space 2}    0.145{col 37}{space 5}    0.143{col 51}{space 3}    0.661
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_us_loc compliant
@@ -1054,7 +1043,6 @@ ombi_produ {c |}       compliant
 {txt}No Location Provided {c |}{res}        59         32 {txt}{c |}{res}        91 
 {txt}{hline 21}{c +}{hline 22}{c +}{hline 10}
                Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(contains_us_loc) missing cformat(%5.3f)
 {res}
@@ -1069,19 +1057,20 @@ ombi_produ {c |}       compliant
     {txt}_subpop_4: contains_us_loc = {res}No Location Provided
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.651{col 26}{space 2}    0.009{col 37}{space 5}    0.634{col 51}{space 3}    0.668
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.355{col 26}{space 2}    0.016{col 37}{space 5}    0.324{col 51}{space 3}    0.387
 {txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.674{col 26}{space 2}    0.030{col 37}{space 5}    0.612{col 51}{space 3}    0.730
-{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.648{col 26}{space 2}    0.050{col 37}{space 5}    0.545{col 51}{space 3}    0.740
+{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.648{col 26}{space 2}    0.050{col 37}{space 5}    0.545{col 51}{space 3}    0.739
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.349{col 26}{space 2}    0.009{col 37}{space 5}    0.332{col 51}{space 3}    0.366
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.645{col 26}{space 2}    0.016{col 37}{space 5}    0.613{col 51}{space 3}    0.676
 {txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.326{col 26}{space 2}    0.030{col 37}{space 5}    0.270{col 51}{space 3}    0.388
-{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.352{col 26}{space 2}    0.050{col 37}{space 5}    0.260{col 51}{space 3}    0.455
+{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.352{col 26}{space 2}    0.050{col 37}{space 5}    0.261{col 51}{space 3}    0.455
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab quartile compliant
@@ -1098,7 +1087,6 @@ sponsored_ {c |}       compliant
 {txt}         4 {c |}{res}       330        628 {txt}{c |}{res}       958 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     2,487      1,722 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion compliant, over(quartile) missing cformat(%5.3f)
 {res}
@@ -1113,6 +1101,7 @@ sponsored_ {c |}       compliant
             {txt}4: quartile = {res}4
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1143,6 +1132,7 @@ sponsored_ {c |}       compliant
 {txt}Proportion estimation{col 35}Number of obs{col 51}= {res}     4,209
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}any_results  {txt}{c |}
@@ -1180,7 +1170,6 @@ start_year {c |}        no        yes {c |}     Total
 {txt}      2018 {c |}{res}        72         54 {txt}{c |}{res}       126 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(start_year) missing cformat(%5.3f) 
 {res}
@@ -1213,23 +1202,24 @@ start_year {c |}        no        yes {c |}     Total
          {txt}2018: start_year = {res}2018
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 8}1991 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
 {space 8}1994 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
 {space 8}1997 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}        .{col 37}{space 5}        .{col 51}{space 3}        .
-{txt}{space 8}1998 {c |}{col 14}{res}{space 2}    0.500{col 26}{space 2}    0.500{col 37}{space 5}    0.019{col 51}{space 3}    0.981
-{txt}{space 8}1999 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.333{col 37}{space 5}    0.026{col 51}{space 3}    0.904
-{txt}{space 8}2002 {c |}{col 14}{res}{space 2}    0.750{col 26}{space 2}    0.250{col 37}{space 5}    0.180{col 51}{space 3}    0.976
-{txt}{space 8}2003 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.333{col 37}{space 5}    0.096{col 51}{space 3}    0.974
-{txt}{space 8}2004 {c |}{col 14}{res}{space 2}    0.182{col 26}{space 2}    0.122{col 37}{space 5}    0.043{col 51}{space 3}    0.526
-{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.294{col 26}{space 2}    0.114{col 37}{space 5}    0.124{col 51}{space 3}    0.550
-{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.296{col 26}{space 2}    0.090{col 37}{space 5}    0.154{col 51}{space 3}    0.494
-{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.318{col 26}{space 2}    0.102{col 37}{space 5}    0.157{col 51}{space 3}    0.539
-{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.318{col 26}{space 2}    0.071{col 37}{space 5}    0.197{col 51}{space 3}    0.470
-{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.265{col 26}{space 2}    0.054{col 37}{space 5}    0.173{col 51}{space 3}    0.383
-{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.300{col 26}{space 2}    0.049{col 37}{space 5}    0.214{col 51}{space 3}    0.403
+{txt}{space 8}1998 {c |}{col 14}{res}{space 2}    0.500{col 26}{space 2}    0.354{col 37}{space 5}    0.059{col 51}{space 3}    0.941
+{txt}{space 8}1999 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.272{col 37}{space 5}    0.043{col 51}{space 3}    0.847
+{txt}{space 8}2002 {c |}{col 14}{res}{space 2}    0.750{col 26}{space 2}    0.217{col 37}{space 5}    0.238{col 51}{space 3}    0.967
+{txt}{space 8}2003 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.272{col 37}{space 5}    0.153{col 51}{space 3}    0.957
+{txt}{space 8}2004 {c |}{col 14}{res}{space 2}    0.182{col 26}{space 2}    0.116{col 37}{space 5}    0.046{col 51}{space 3}    0.507
+{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.294{col 26}{space 2}    0.111{col 37}{space 5}    0.128{col 51}{space 3}    0.542
+{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.296{col 26}{space 2}    0.088{col 37}{space 5}    0.156{col 51}{space 3}    0.490
+{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.318{col 26}{space 2}    0.099{col 37}{space 5}    0.160{col 51}{space 3}    0.534
+{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.318{col 26}{space 2}    0.070{col 37}{space 5}    0.198{col 51}{space 3}    0.468
+{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.265{col 26}{space 2}    0.054{col 37}{space 5}    0.174{col 51}{space 3}    0.382
+{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.300{col 26}{space 2}    0.048{col 37}{space 5}    0.214{col 51}{space 3}    0.402
 {txt}{space 8}2011 {c |}{col 14}{res}{space 2}    0.368{col 26}{space 2}    0.041{col 37}{space 5}    0.291{col 51}{space 3}    0.452
 {txt}{space 8}2012 {c |}{col 14}{res}{space 2}    0.266{col 26}{space 2}    0.029{col 37}{space 5}    0.213{col 51}{space 3}    0.327
 {txt}{space 8}2013 {c |}{col 14}{res}{space 2}    0.312{col 26}{space 2}    0.024{col 37}{space 5}    0.268{col 51}{space 3}    0.360
@@ -1237,23 +1227,23 @@ start_year {c |}        no        yes {c |}     Total
 {txt}{space 8}2015 {c |}{col 14}{res}{space 2}    0.327{col 26}{space 2}    0.017{col 37}{space 5}    0.295{col 51}{space 3}    0.360
 {txt}{space 8}2016 {c |}{col 14}{res}{space 2}    0.359{col 26}{space 2}    0.016{col 37}{space 5}    0.329{col 51}{space 3}    0.391
 {txt}{space 8}2017 {c |}{col 14}{res}{space 2}    0.490{col 26}{space 2}    0.018{col 37}{space 5}    0.456{col 51}{space 3}    0.525
-{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.571{col 26}{space 2}    0.044{col 37}{space 5}    0.483{col 51}{space 3}    0.655
+{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.571{col 26}{space 2}    0.044{col 37}{space 5}    0.484{col 51}{space 3}    0.655
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 8}1991 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}        .{col 37}{space 5}        .{col 51}{space 3}        .
 {txt}{space 8}1994 {c |}{col 14}{res}{space 2}    1.000{col 26}{space 2}        .{col 37}{space 5}        .{col 51}{space 3}        .
 {txt}{space 8}1997 {c |}{col 14}{res}{space 2}    0.000{col 26}{txt}  (no observations)
-{space 8}1998 {c |}{col 14}{res}{space 2}    0.500{col 26}{space 2}    0.500{col 37}{space 5}    0.019{col 51}{space 3}    0.981
-{txt}{space 8}1999 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.333{col 37}{space 5}    0.096{col 51}{space 3}    0.974
-{txt}{space 8}2002 {c |}{col 14}{res}{space 2}    0.250{col 26}{space 2}    0.250{col 37}{space 5}    0.024{col 51}{space 3}    0.820
-{txt}{space 8}2003 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.333{col 37}{space 5}    0.026{col 51}{space 3}    0.904
-{txt}{space 8}2004 {c |}{col 14}{res}{space 2}    0.818{col 26}{space 2}    0.122{col 37}{space 5}    0.474{col 51}{space 3}    0.957
-{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.706{col 26}{space 2}    0.114{col 37}{space 5}    0.450{col 51}{space 3}    0.876
-{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.704{col 26}{space 2}    0.090{col 37}{space 5}    0.506{col 51}{space 3}    0.846
-{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.682{col 26}{space 2}    0.102{col 37}{space 5}    0.461{col 51}{space 3}    0.843
-{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.682{col 26}{space 2}    0.071{col 37}{space 5}    0.530{col 51}{space 3}    0.803
-{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.735{col 26}{space 2}    0.054{col 37}{space 5}    0.617{col 51}{space 3}    0.827
-{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.700{col 26}{space 2}    0.049{col 37}{space 5}    0.597{col 51}{space 3}    0.786
+{space 8}1998 {c |}{col 14}{res}{space 2}    0.500{col 26}{space 2}    0.354{col 37}{space 5}    0.059{col 51}{space 3}    0.941
+{txt}{space 8}1999 {c |}{col 14}{res}{space 2}    0.667{col 26}{space 2}    0.272{col 37}{space 5}    0.153{col 51}{space 3}    0.957
+{txt}{space 8}2002 {c |}{col 14}{res}{space 2}    0.250{col 26}{space 2}    0.217{col 37}{space 5}    0.033{col 51}{space 3}    0.762
+{txt}{space 8}2003 {c |}{col 14}{res}{space 2}    0.333{col 26}{space 2}    0.272{col 37}{space 5}    0.043{col 51}{space 3}    0.847
+{txt}{space 8}2004 {c |}{col 14}{res}{space 2}    0.818{col 26}{space 2}    0.116{col 37}{space 5}    0.493{col 51}{space 3}    0.954
+{txt}{space 8}2005 {c |}{col 14}{res}{space 2}    0.706{col 26}{space 2}    0.111{col 37}{space 5}    0.458{col 51}{space 3}    0.872
+{txt}{space 8}2006 {c |}{col 14}{res}{space 2}    0.704{col 26}{space 2}    0.088{col 37}{space 5}    0.510{col 51}{space 3}    0.844
+{txt}{space 8}2007 {c |}{col 14}{res}{space 2}    0.682{col 26}{space 2}    0.099{col 37}{space 5}    0.466{col 51}{space 3}    0.840
+{txt}{space 8}2008 {c |}{col 14}{res}{space 2}    0.682{col 26}{space 2}    0.070{col 37}{space 5}    0.532{col 51}{space 3}    0.802
+{txt}{space 8}2009 {c |}{col 14}{res}{space 2}    0.735{col 26}{space 2}    0.054{col 37}{space 5}    0.618{col 51}{space 3}    0.826
+{txt}{space 8}2010 {c |}{col 14}{res}{space 2}    0.700{col 26}{space 2}    0.048{col 37}{space 5}    0.598{col 51}{space 3}    0.786
 {txt}{space 8}2011 {c |}{col 14}{res}{space 2}    0.632{col 26}{space 2}    0.041{col 37}{space 5}    0.548{col 51}{space 3}    0.709
 {txt}{space 8}2012 {c |}{col 14}{res}{space 2}    0.734{col 26}{space 2}    0.029{col 37}{space 5}    0.673{col 51}{space 3}    0.787
 {txt}{space 8}2013 {c |}{col 14}{res}{space 2}    0.688{col 26}{space 2}    0.024{col 37}{space 5}    0.640{col 51}{space 3}    0.732
@@ -1261,7 +1251,7 @@ start_year {c |}        no        yes {c |}     Total
 {txt}{space 8}2015 {c |}{col 14}{res}{space 2}    0.673{col 26}{space 2}    0.017{col 37}{space 5}    0.640{col 51}{space 3}    0.705
 {txt}{space 8}2016 {c |}{col 14}{res}{space 2}    0.641{col 26}{space 2}    0.016{col 37}{space 5}    0.609{col 51}{space 3}    0.671
 {txt}{space 8}2017 {c |}{col 14}{res}{space 2}    0.510{col 26}{space 2}    0.018{col 37}{space 5}    0.475{col 51}{space 3}    0.544
-{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.429{col 26}{space 2}    0.044{col 37}{space 5}    0.345{col 51}{space 3}    0.517
+{txt}{space 8}2018 {c |}{col 14}{res}{space 2}    0.429{col 26}{space 2}    0.044{col 37}{space 5}    0.345{col 51}{space 3}    0.516
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab sponsor_class any_results
@@ -1274,7 +1264,6 @@ noncommercial {c |}{res}       820      1,358 {txt}{c |}{res}     2,178
 {txt}       us_gov {c |}{res}        50        144 {txt}{c |}{res}       194 
 {txt}{hline 14}{c +}{hline 22}{c +}{hline 10}
         Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(sponsor_class) missing cformat(%5.3f) 
 {res}
@@ -1288,6 +1277,7 @@ noncommercial {c |}{res}       820      1,358 {txt}{c |}{res}     2,178
        {txt}us_gov: sponsor_class = {res}us_gov
 
 {txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 15}{c |}{col 38}             L{col 52}ogit
 {col 1}         Over{col 15}{c |} Proportion{col 27}   Std. Err.{col 39}     [95% Con{col 52}f. Interval]
 {hline 14}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no            {txt}{c |}
@@ -1310,7 +1300,6 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
 {txt}       yes {c |}{res}       233        482 {txt}{c |}{res}       715 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(industry_collab) missing cformat(%5.3f) 
 {res}
@@ -1323,6 +1312,7 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
           {txt}yes: industry_collab = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1343,7 +1333,6 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
 {txt}       yes {c |}{res}       131        330 {txt}{c |}{res}       461 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(us_gov_collab) missing cformat(%5.3f) 
 {res}
@@ -1356,6 +1345,7 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
           {txt}yes: us_gov_collab = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1380,7 +1370,6 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
 {txt}       N/A {c |}{res}       530        574 {txt}{c |}{res}     1,104 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(phase_cat) missing cformat(%5.3f) 
 {res}
@@ -1397,12 +1386,13 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
     {txt}_subpop_6: phase_cat = {res}N/A
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.416{col 26}{space 2}    0.027{col 37}{space 5}    0.364{col 51}{space 3}    0.470
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.311{col 26}{space 2}    0.013{col 37}{space 5}    0.286{col 51}{space 3}    0.336
-{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.434{col 26}{space 2}    0.050{col 37}{space 5}    0.340{col 51}{space 3}    0.534
+{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.434{col 26}{space 2}    0.050{col 37}{space 5}    0.340{col 51}{space 3}    0.533
 {txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.257{col 26}{space 2}    0.016{col 37}{space 5}    0.227{col 51}{space 3}    0.290
 {txt}{space 3}_subpop_5 {c |}{col 14}{res}{space 2}    0.347{col 26}{space 2}    0.019{col 37}{space 5}    0.310{col 51}{space 3}    0.386
 {txt}{space 3}_subpop_6 {c |}{col 14}{res}{space 2}    0.480{col 26}{space 2}    0.015{col 37}{space 5}    0.451{col 51}{space 3}    0.510
@@ -1410,7 +1400,7 @@ noncommercial {c |}{col 15}{res}{space 2}    0.624{col 27}{space 2}    0.010{col
 {res}yes          {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.584{col 26}{space 2}    0.027{col 37}{space 5}    0.530{col 51}{space 3}    0.636
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.689{col 26}{space 2}    0.013{col 37}{space 5}    0.664{col 51}{space 3}    0.714
-{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.566{col 26}{space 2}    0.050{col 37}{space 5}    0.466{col 51}{space 3}    0.660
+{txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.566{col 26}{space 2}    0.050{col 37}{space 5}    0.467{col 51}{space 3}    0.660
 {txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.743{col 26}{space 2}    0.016{col 37}{space 5}    0.710{col 51}{space 3}    0.773
 {txt}{space 3}_subpop_5 {c |}{col 14}{res}{space 2}    0.653{col 26}{space 2}    0.019{col 37}{space 5}    0.614{col 51}{space 3}    0.690
 {txt}{space 3}_subpop_6 {c |}{col 14}{res}{space 2}    0.520{col 26}{space 2}    0.015{col 37}{space 5}    0.490{col 51}{space 3}    0.549
@@ -1425,7 +1415,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       188        475 {txt}{c |}{res}       663 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(terminated) missing cformat(%5.3f)
 {res}
@@ -1438,6 +1427,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: terminated = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1458,7 +1448,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}     1,377      2,434 {txt}{c |}{res}     3,811 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(full_completion) missing cformat(%5.3f)
 {res}
@@ -1471,6 +1460,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: full_completion = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1491,7 +1481,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       943      2,025 {txt}{c |}{res}     2,968 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_drug) missing cformat(%5.3f)
 {res}
@@ -1504,6 +1493,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_drug = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1524,7 +1514,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       104        265 {txt}{c |}{res}       369 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_biological) missing cformat(%5.3f)
 {res}
@@ -1537,6 +1526,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_biological = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1557,7 +1547,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}       487        533 {txt}{c |}{res}     1,020 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_device) missing cformat(%5.3f)
 {res}
@@ -1570,6 +1559,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_device = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1590,7 +1580,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}        11         14 {txt}{c |}{res}        25 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_diagnostic) missing cformat(%5.3f)
 {res}
@@ -1603,15 +1592,16 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_diagnostic = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.361{col 26}{space 2}    0.007{col 37}{space 5}    0.347{col 51}{space 3}    0.376
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.440{col 26}{space 2}    0.101{col 37}{space 5}    0.260{col 51}{space 3}    0.638
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.440{col 26}{space 2}    0.099{col 37}{space 5}    0.263{col 51}{space 3}    0.634
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.639{col 26}{space 2}    0.007{col 37}{space 5}    0.624{col 51}{space 3}    0.653
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.560{col 26}{space 2}    0.101{col 37}{space 5}    0.362{col 51}{space 3}    0.740
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.560{col 26}{space 2}    0.099{col 37}{space 5}    0.366{col 51}{space 3}    0.737
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_radiation any_results
@@ -1623,7 +1613,6 @@ terminated {c |}        no        yes {c |}     Total
 {txt}       yes {c |}{res}        39         64 {txt}{c |}{res}       103 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_radiation) missing cformat(%5.3f)
 {res}
@@ -1636,6 +1625,7 @@ terminated {c |}        no        yes {c |}     Total
           {txt}yes: contains_radiation = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1657,7 +1647,6 @@ ombi_produ {c |}      any_results
 {txt}       yes {c |}{res}         6          7 {txt}{c |}{res}        13 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_combi_product) missing cformat(%5.3f)
 {res}
@@ -1670,15 +1659,16 @@ ombi_produ {c |}      any_results
           {txt}yes: contains_combi_product = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.362{col 26}{space 2}    0.007{col 37}{space 5}    0.347{col 51}{space 3}    0.376
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.462{col 26}{space 2}    0.144{col 37}{space 5}    0.216{col 51}{space 3}    0.727
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.462{col 26}{space 2}    0.138{col 37}{space 5}    0.224{col 51}{space 3}    0.718
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.638{col 26}{space 2}    0.007{col 37}{space 5}    0.624{col 51}{space 3}    0.653
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.538{col 26}{space 2}    0.144{col 37}{space 5}    0.273{col 51}{space 3}    0.784
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.538{col 26}{space 2}    0.138{col 37}{space 5}    0.282{col 51}{space 3}    0.776
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_genetic any_results
@@ -1690,7 +1680,6 @@ ombi_produ {c |}      any_results
 {txt}       yes {c |}{res}         6          5 {txt}{c |}{res}        11 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_genetic) missing cformat(%5.3f)
 {res}
@@ -1703,15 +1692,16 @@ ombi_produ {c |}      any_results
           {txt}yes: contains_genetic = {res}yes
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.361{col 26}{space 2}    0.007{col 37}{space 5}    0.347{col 51}{space 3}    0.376
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.545{col 26}{space 2}    0.157{col 37}{space 5}    0.257{col 51}{space 3}    0.806
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.545{col 26}{space 2}    0.150{col 37}{space 5}    0.268{col 51}{space 3}    0.797
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 10}no {c |}{col 14}{res}{space 2}    0.639{col 26}{space 2}    0.007{col 37}{space 5}    0.624{col 51}{space 3}    0.653
-{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.455{col 26}{space 2}    0.157{col 37}{space 5}    0.194{col 51}{space 3}    0.743
+{txt}{space 9}yes {c |}{col 14}{res}{space 2}    0.455{col 26}{space 2}    0.150{col 37}{space 5}    0.203{col 51}{space 3}    0.732
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab contains_us_loc any_results
@@ -1725,7 +1715,6 @@ ombi_produ {c |}      any_results
 {txt}No Location Provided {c |}{res}        47         44 {txt}{c |}{res}        91 
 {txt}{hline 21}{c +}{hline 22}{c +}{hline 10}
                Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(contains_us_loc) missing cformat(%5.3f)
 {res}
@@ -1740,19 +1729,20 @@ ombi_produ {c |}      any_results
     {txt}_subpop_4: contains_us_loc = {res}No Location Provided
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.386{col 26}{space 2}    0.009{col 37}{space 5}    0.368{col 51}{space 3}    0.403
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.201{col 26}{space 2}    0.014{col 37}{space 5}    0.176{col 51}{space 3}    0.229
 {txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.591{col 26}{space 2}    0.032{col 37}{space 5}    0.528{col 51}{space 3}    0.651
-{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.516{col 26}{space 2}    0.053{col 37}{space 5}    0.414{col 51}{space 3}    0.618
+{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.516{col 26}{space 2}    0.052{col 37}{space 5}    0.415{col 51}{space 3}    0.617
 {txt}{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}yes          {txt}{c |}
 {space 3}_subpop_1 {c |}{col 14}{res}{space 2}    0.614{col 26}{space 2}    0.009{col 37}{space 5}    0.597{col 51}{space 3}    0.632
 {txt}{space 3}_subpop_2 {c |}{col 14}{res}{space 2}    0.799{col 26}{space 2}    0.014{col 37}{space 5}    0.771{col 51}{space 3}    0.824
 {txt}{space 3}_subpop_3 {c |}{col 14}{res}{space 2}    0.409{col 26}{space 2}    0.032{col 37}{space 5}    0.349{col 51}{space 3}    0.472
-{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.484{col 26}{space 2}    0.053{col 37}{space 5}    0.382{col 51}{space 3}    0.586
+{txt}{space 3}_subpop_4 {c |}{col 14}{res}{space 2}    0.484{col 26}{space 2}    0.052{col 37}{space 5}    0.383{col 51}{space 3}    0.585
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. tab quartile any_results
@@ -1769,7 +1759,6 @@ sponsored_ {c |}      any_results
 {txt}         4 {c |}{res}        90        868 {txt}{c |}{res}       958 
 {txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
      Total {c |}{res}     1,523      2,686 {txt}{c |}{res}     4,209 
-
 {txt}
 {com}. proportion any_results, over(quartile) missing cformat(%5.3f)
 {res}
@@ -1784,6 +1773,7 @@ sponsored_ {c |}      any_results
             {txt}4: quartile = {res}4
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 37}             L{col 51}ogit
 {col 1}        Over{col 14}{c |} Proportion{col 26}   Std. Err.{col 38}     [95% Con{col 51}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
 {res}no           {txt}{c |}
@@ -1800,11 +1790,7 @@ sponsored_ {c |}      any_results
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
 
 {com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\ndevito\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. * table 3 logistic regression
+. * table 3 logistic regression
 . *regress!
 . logistic compliant start_year
 {res}
@@ -1819,6 +1805,7 @@ sponsored_ {c |}      any_results
 {space 2}start_year {c |}{col 14}{res}{space 2}  .996103{col 26}{space 2} .0120632{col 37}{space 1}   -0.32{col 46}{space 3}0.747{col 54}{space 4}  .972738{col 67}{space 3} 1.020029
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1805.526{col 26}{space 2} 44050.06{col 37}{space 1}    0.31{col 46}{space 3}0.759{col 54}{space 4} 3.09e-18{col 67}{space 3} 1.06e+24
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.sponsor_class
 {res}
@@ -1836,6 +1823,7 @@ sponsor_class {c |}
 {txt}{space 13} {c |}
 {space 8}_cons {c |}{col 15}{res}{space 2} .5114504{col 27}{space 2} .0231615{col 38}{space 1}  -14.81{col 47}{space 3}0.000{col 55}{space 4}  .468011{col 68}{space 3} .5589217
 {txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.industry_collab
 {res}
@@ -1851,6 +1839,7 @@ industry_collab {c |}
 {space 11}yes  {c |}{col 17}{res}{space 2} 1.128633{col 29}{space 2} .0936389{col 40}{space 1}    1.46{col 49}{space 3}0.145{col 57}{space 4} .9592491{col 70}{space 3} 1.327927
 {txt}{space 10}_cons {c |}{col 17}{res}{space 2}  .678194{col 29}{space 2} .0233807{col 40}{space 1}  -11.26{col 49}{space 3}0.000{col 57}{space 4} .6338826{col 70}{space 3} .7256031
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.us_gov_collab
 {res}
@@ -1866,6 +1855,7 @@ us_gov_collab {c |}
 {space 9}yes  {c |}{col 15}{res}{space 2} .9164048{col 27}{space 2} .0926253{col 38}{space 1}   -0.86{col 47}{space 3}0.388{col 55}{space 4} .7517136{col 68}{space 3} 1.117178
 {txt}{space 8}_cons {c |}{col 15}{res}{space 2} .6990027{col 27}{space 2} .0232024{col 38}{space 1}  -10.79{col 47}{space 3}0.000{col 55}{space 4} .6549745{col 68}{space 3} .7459906
 {txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant ib3.phase_cat
 {res}
@@ -1886,6 +1876,7 @@ us_gov_collab {c |}
 {txt}{space 12} {c |}
 {space 7}_cons {c |}{col 14}{res}{space 2} 1.238806{col 26}{space 2} .0909887{col 37}{space 1}    2.92{col 46}{space 3}0.004{col 54}{space 4} 1.072713{col 67}{space 3} 1.430616
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.terminated
 {res}
@@ -1901,6 +1892,7 @@ us_gov_collab {c |}
 {space 8}yes  {c |}{col 14}{res}{space 2} 1.243434{col 26}{space 2} .1059404{col 37}{space 1}    2.56{col 46}{space 3}0.011{col 54}{space 4} 1.052206{col 67}{space 3} 1.469417
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2} .6687059{col 26}{space 2} .0229154{col 37}{space 1}  -11.74{col 46}{space 3}0.000{col 54}{space 4} .6252676{col 67}{space 3} .7151619
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.full_completion
 {res}
@@ -1916,6 +1908,7 @@ full_completion {c |}
 {space 11}yes  {c |}{col 17}{res}{space 2} .8707243{col 29}{space 2} .0925048{col 40}{space 1}   -1.30{col 49}{space 3}0.193{col 57}{space 4} .7070497{col 70}{space 3} 1.072288
 {txt}{space 10}_cons {c |}{col 17}{res}{space 2} .7847534{col 29}{space 2} .0792507{col 40}{space 1}   -2.40{col 49}{space 3}0.016{col 57}{space 4} .6438312{col 70}{space 3} .9565208
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_drug
 {res}
@@ -1931,6 +1924,7 @@ contains_drug {c |}
 {space 9}yes  {c |}{col 15}{res}{space 2} 1.671678{col 27}{space 2} .1187224{col 38}{space 1}    7.23{col 47}{space 3}0.000{col 55}{space 4} 1.454455{col 68}{space 3} 1.921343
 {txt}{space 8}_cons {c |}{col 15}{res}{space 2} .4791418{col 27}{space 2}  .029064{col 38}{space 1}  -12.13{col 47}{space 3}0.000{col 55}{space 4} .4254333{col 68}{space 3} .5396308
 {txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_biological
 {res}
@@ -1943,9 +1937,10 @@ contains_drug {c |}
 {col 1}          compliant{col 21}{c |} Odds Ratio{col 33}   Std. Err.{col 45}      z{col 53}   P>|z|{col 61}     [95% Con{col 74}f. Interval]
 {hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 contains_biological {c |}
-{space 15}yes  {c |}{col 21}{res}{space 2} 1.419307{col 33}{space 2} .1550247{col 44}{space 1}    3.21{col 53}{space 3}0.001{col 61}{space 4} 1.145786{col 74}{space 3} 1.758124
+{space 15}yes  {c |}{col 21}{res}{space 2} 1.419307{col 33}{space 2} .1550247{col 44}{space 1}    3.21{col 53}{space 3}0.001{col 61}{space 4} 1.145786{col 74}{space 3} 1.758123
 {txt}{space 14}_cons {c |}{col 21}{res}{space 2} .6710183{col 33}{space 2} .0220893{col 44}{space 1}  -12.12{col 53}{space 3}0.000{col 61}{space 4} .6290911{col 74}{space 3} .7157398
 {txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_device
 {res}
@@ -1961,6 +1956,7 @@ contains_device {c |}
 {space 11}yes  {c |}{col 17}{res}{space 2} .5625825{col 29}{space 2} .0431133{col 40}{space 1}   -7.51{col 49}{space 3}0.000{col 57}{space 4} .4841219{col 70}{space 3}  .653759
 {txt}{space 10}_cons {c |}{col 17}{res}{space 2} .7905671{col 29}{space 2} .0281924{col 40}{space 1}   -6.59{col 49}{space 3}0.000{col 57}{space 4} .7371978{col 70}{space 3} .8478001
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_diagnostic
 {res}
@@ -1976,6 +1972,7 @@ contains_diagnostic {c |}
 {space 15}yes  {c |}{col 21}{res}{space 2} .5598639{col 33}{space 2} .2500034{col 44}{space 1}   -1.30{col 53}{space 3}0.194{col 61}{space 4} .2333373{col 74}{space 3} 1.343324
 {txt}{space 14}_cons {c |}{col 21}{res}{space 2} .6946132{col 33}{space 2} .0218347{col 44}{space 1}  -11.59{col 53}{space 3}0.000{col 61}{space 4} .6531097{col 74}{space 3} .7387541
 {txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_radiation
 {res}
@@ -1988,9 +1985,10 @@ contains_diagnostic {c |}
 {col 1}         compliant{col 20}{c |} Odds Ratio{col 32}   Std. Err.{col 44}      z{col 52}   P>|z|{col 60}     [95% Con{col 73}f. Interval]
 {hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 contains_radiation {c |}
-{space 14}yes  {c |}{col 20}{res}{space 2} .7058495{col 32}{space 2} .1495844{col 43}{space 1}   -1.64{col 52}{space 3}0.100{col 60}{space 4} .4659341{col 73}{space 3}   1.0693
+{space 14}yes  {c |}{col 20}{res}{space 2} .7058521{col 32}{space 2} .1495849{col 43}{space 1}   -1.64{col 52}{space 3}0.100{col 60}{space 4} .4659359{col 73}{space 3} 1.069304
 {txt}{space 13}_cons {c |}{col 20}{res}{space 2} .6980976{col 32}{space 2} .0221417{col 43}{space 1}  -11.33{col 52}{space 3}0.000{col 60}{space 4}  .656022{col 73}{space 3} .7428718
 {txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_combi_product
 {res}
@@ -2006,6 +2004,7 @@ contains_combi_product {c |}
 {space 18}yes  {c |}{col 24}{res}{space 2} .2617357{col 36}{space 2}  .201365{col 47}{space 1}   -1.74{col 56}{space 3}0.081{col 64}{space 4} .0579423{col 77}{space 3} 1.182307
 {txt}{space 17}_cons {c |}{col 24}{res}{space 2} .6946688{col 36}{space 2}  .021805{col 47}{space 1}  -11.61{col 56}{space 3}0.000{col 64}{space 4} .6532199{col 77}{space 3} .7387478
 {txt}{hline 23}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_genetic
 {res}
@@ -2021,6 +2020,7 @@ contains_genetic {c |}
 {space 12}yes  {c |}{col 18}{res}{space 2} .8248811{col 30}{space 2} .5176694{col 41}{space 1}   -0.31{col 50}{space 3}0.759{col 58}{space 4} .2411038{col 71}{space 3}  2.82214
 {txt}{space 11}_cons {c |}{col 18}{res}{space 2} .6927419{col 30}{space 2} .0217448{col 41}{space 1}  -11.69{col 50}{space 3}0.000{col 58}{space 4} .6514075{col 71}{space 3} .7366993
 {txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.contains_us_loc
 {res}
@@ -2039,6 +2039,7 @@ contains_genetic {c |}
 {txt}{space 21} {c |}
 {space 16}_cons {c |}{col 23}{res}{space 2} .5353122{col 35}{space 2} .0205088{col 46}{space 1}  -16.31{col 55}{space 3}0.000{col 63}{space 4} .4965878{col 76}{space 3} .5770563
 {txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant i.quartile
 {res}
@@ -2051,12 +2052,13 @@ contains_genetic {c |}
 {col 1}   compliant{col 14}{c |} Odds Ratio{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 4}quartile {c |}
-{space 10}2  {c |}{col 14}{res}{space 2} 1.760028{col 26}{space 2} .1702795{col 37}{space 1}    5.84{col 46}{space 3}0.000{col 54}{space 4}  1.45602{col 67}{space 3} 2.127511
-{txt}{space 10}3  {c |}{col 14}{res}{space 2} 3.522662{col 26}{space 2} .3390323{col 37}{space 1}   13.08{col 46}{space 3}0.000{col 54}{space 4} 2.917082{col 67}{space 3} 4.253959
-{txt}{space 10}4  {c |}{col 14}{res}{space 2} 7.004104{col 26}{space 2} .6968796{col 37}{space 1}   19.56{col 46}{space 3}0.000{col 54}{space 4} 5.763171{col 67}{space 3} 8.512236
+{space 10}2  {c |}{col 14}{res}{space 2} 1.760027{col 26}{space 2} .1702794{col 37}{space 1}    5.84{col 46}{space 3}0.000{col 54}{space 4} 1.456019{col 67}{space 3} 2.127509
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}  3.52266{col 26}{space 2}  .339032{col 37}{space 1}   13.08{col 46}{space 3}0.000{col 54}{space 4}  2.91708{col 67}{space 3} 4.253957
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} 7.004099{col 26}{space 2} .6968791{col 37}{space 1}   19.56{col 46}{space 3}0.000{col 54}{space 4} 5.763167{col 67}{space 3}  8.51223
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .2717022{col 26}{space 2} .0197368{col 37}{space 1}  -17.94{col 46}{space 3}0.000{col 54}{space 4} .2356463{col 67}{space 3} .3132749
+{space 7}_cons {c |}{col 14}{res}{space 2} .2717024{col 26}{space 2} .0197368{col 37}{space 1}  -17.94{col 46}{space 3}0.000{col 54}{space 4} .2356465{col 67}{space 3} .3132751
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic compliant start_year i.sponsor_class i.industry_collab i.us_gov_collab ib3.phase_cat i.terminated i.full_completion i.contains_drug i.contains_biological i.contains_device i.contains_diagnostic i.contains_radiation i.contains_combi_product i.contains_genetic i.contains_us_loc i.quartile, allbaselevels
 {res}
@@ -2141,6 +2143,7 @@ contains_combi_product {c |}
 {txt}{space 22} {c |}
 {space 17}_cons {c |}{col 24}{res}{space 2} 8.58e-47{col 36}{space 2} 2.67e-45{col 47}{space 1}   -3.41{col 56}{space 3}0.001{col 64}{space 4} 2.86e-73{col 77}{space 3} 2.57e-20
 {txt}{hline 23}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. 
 . logistic any_results start_year
@@ -2156,6 +2159,7 @@ contains_combi_product {c |}
 {space 2}start_year {c |}{col 14}{res}{space 2} .9147676{col 26}{space 2} .0125376{col 37}{space 1}   -6.50{col 46}{space 3}0.000{col 54}{space 4} .8905215{col 67}{space 3} .9396739
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.56e+78{col 26}{space 2} 4.31e+79{col 37}{space 1}    6.52{col 46}{space 3}0.000{col 54}{space 4} 4.87e+54{col 67}{space 3} 5.0e+101
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.sponsor_class
 {res}
@@ -2173,6 +2177,7 @@ sponsor_class {c |}
 {txt}{space 13} {c |}
 {space 8}_cons {c |}{col 15}{res}{space 2} 1.656098{col 27}{space 2} .0732416{col 38}{space 1}   11.41{col 47}{space 3}0.000{col 55}{space 4} 1.518592{col 68}{space 3} 1.806054
 {txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.industry_collab
 {res}
@@ -2188,6 +2193,7 @@ industry_collab {c |}
 {space 11}yes  {c |}{col 17}{res}{space 2} 1.210791{col 29}{space 2} .1055227{col 40}{space 1}    2.19{col 49}{space 3}0.028{col 57}{space 4}  1.02067{col 70}{space 3} 1.436326
 {txt}{space 10}_cons {c |}{col 17}{res}{space 2} 1.708527{col 29}{space 2} .0598939{col 40}{space 1}   15.28{col 49}{space 3}0.000{col 57}{space 4} 1.595079{col 70}{space 3} 1.830044
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.us_gov_collab
 {res}
@@ -2203,6 +2209,7 @@ us_gov_collab {c |}
 {space 9}yes  {c |}{col 15}{res}{space 2} 1.488355{col 27}{space 2} .1617229{col 38}{space 1}    3.66{col 47}{space 3}0.000{col 55}{space 4} 1.202863{col 68}{space 3} 1.841608
 {txt}{space 8}_cons {c |}{col 15}{res}{space 2} 1.692529{col 27}{space 2} .0572175{col 38}{space 1}   15.57{col 47}{space 3}0.000{col 55}{space 4} 1.584019{col 68}{space 3} 1.808472
 {txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results ib3.phase_cat
 {res}
@@ -2223,6 +2230,7 @@ us_gov_collab {c |}
 {txt}{space 12} {c |}
 {space 7}_cons {c |}{col 14}{res}{space 2}  2.88601{col 26}{space 2} .2410584{col 37}{space 1}   12.69{col 46}{space 3}0.000{col 54}{space 4} 2.450191{col 67}{space 3} 3.399349
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.terminated
 {res}
@@ -2238,6 +2246,7 @@ us_gov_collab {c |}
 {space 8}yes  {c |}{col 14}{res}{space 2} 1.525556{col 26}{space 2}  .141686{col 37}{space 1}    4.55{col 46}{space 3}0.000{col 54}{space 4} 1.271666{col 67}{space 3} 1.830137
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2}  1.65618{col 26}{space 2}  .057404{col 37}{space 1}   14.56{col 46}{space 3}0.000{col 54}{space 4} 1.547407{col 67}{space 3} 1.772599
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.full_completion
 {res}
@@ -2253,6 +2262,7 @@ full_completion {c |}
 {space 11}yes  {c |}{col 17}{res}{space 2} 1.024092{col 29}{space 2} .1119714{col 40}{space 1}    0.22{col 49}{space 3}0.828{col 57}{space 4} .8265534{col 70}{space 3}  1.26884
 {txt}{space 10}_cons {c |}{col 17}{res}{space 2} 1.726027{col 29}{space 2} .1795199{col 40}{space 1}    5.25{col 49}{space 3}0.000{col 57}{space 4}  1.40772{col 70}{space 3} 2.116309
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_drug
 {res}
@@ -2268,6 +2278,7 @@ contains_drug {c |}
 {space 9}yes  {c |}{col 15}{res}{space 2} 1.884256{col 27}{space 2} .1304263{col 38}{space 1}    9.15{col 47}{space 3}0.000{col 55}{space 4} 1.645207{col 68}{space 3} 2.158038
 {txt}{space 8}_cons {c |}{col 15}{res}{space 2} 1.139655{col 27}{space 2} .0648402{col 38}{space 1}    2.30{col 47}{space 3}0.022{col 55}{space 4}   1.0194{col 68}{space 3} 1.274096
 {txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_biological
 {res}
@@ -2283,6 +2294,7 @@ contains_biological {c |}
 {space 15}yes  {c |}{col 21}{res}{space 2} 1.493483{col 33}{space 2} .1798809{col 44}{space 1}    3.33{col 53}{space 3}0.001{col 61}{space 4} 1.179446{col 74}{space 3} 1.891134
 {txt}{space 14}_cons {c |}{col 21}{res}{space 2} 1.706131{col 33}{space 2} .0570413{col 44}{space 1}   15.98{col 53}{space 3}0.000{col 61}{space 4} 1.597916{col 74}{space 3} 1.821674
 {txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_device
 {res}
@@ -2298,6 +2310,7 @@ contains_device {c |}
 {space 11}yes  {c |}{col 17}{res}{space 2} .5266402{col 29}{space 2} .0385538{col 40}{space 1}   -8.76{col 49}{space 3}0.000{col 57}{space 4}  .456247{col 70}{space 3} .6078942
 {txt}{space 10}_cons {c |}{col 17}{res}{space 2} 2.078185{col 29}{space 2} .0785796{col 40}{space 1}   19.35{col 49}{space 3}0.000{col 57}{space 4} 1.929741{col 70}{space 3} 2.238049
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_diagnostic
 {res}
@@ -2313,6 +2326,7 @@ contains_diagnostic {c |}
 {space 15}yes  {c |}{col 21}{res}{space 2}  .720196{col 33}{space 2} .2910993{col 44}{space 1}   -0.81{col 53}{space 3}0.417{col 61}{space 4} .3261366{col 74}{space 3} 1.590383
 {txt}{space 14}_cons {c |}{col 21}{res}{space 2} 1.767196{col 33}{space 2} .0568704{col 44}{space 1}   17.69{col 53}{space 3}0.000{col 61}{space 4} 1.659174{col 74}{space 3}  1.88225
 {txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_radiation
 {res}
@@ -2328,6 +2342,7 @@ contains_radiation {c |}
 {space 14}yes  {c |}{col 20}{res}{space 2} .9287879{col 32}{space 2} .1910715{col 43}{space 1}   -0.36{col 52}{space 3}0.720{col 60}{space 4} .6205921{col 73}{space 3} 1.390039
 {txt}{space 13}_cons {c |}{col 20}{res}{space 2} 1.766846{col 32}{space 2} .0573951{col 43}{space 1}   17.52{col 52}{space 3}0.000{col 60}{space 4}  1.65786{col 73}{space 3} 1.882997
 {txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_combi_product
 {res}
@@ -2343,6 +2358,7 @@ contains_combi_product {c |}
 {space 18}yes  {c |}{col 24}{res}{space 2} .6606321{col 36}{space 2} .3681542{col 47}{space 1}   -0.74{col 56}{space 3}0.457{col 64}{space 4} .2216183{col 77}{space 3} 1.969308
 {txt}{space 17}_cons {c |}{col 24}{res}{space 2} 1.765985{col 36}{space 2} .0567448{col 47}{space 1}   17.70{col 56}{space 3}0.000{col 64}{space 4} 1.658198{col 77}{space 3}  1.88078
 {txt}{hline 23}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_genetic
 {res}
@@ -2358,6 +2374,7 @@ contains_genetic {c |}
 {space 12}yes  {c |}{col 18}{res}{space 2}  .471528{col 30}{space 2}  .285926{col 41}{space 1}   -1.24{col 50}{space 3}0.215{col 58}{space 4} .1436661{col 71}{space 3} 1.547607
 {txt}{space 11}_cons {c |}{col 18}{res}{space 2} 1.767304{col 30}{space 2} .0567795{col 41}{space 1}   17.72{col 50}{space 3}0.000{col 58}{space 4}  1.65945{col 71}{space 3} 1.882168
 {txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.contains_us_loc
 {res}
@@ -2376,6 +2393,7 @@ contains_genetic {c |}
 {txt}{space 21} {c |}
 {space 16}_cons {c |}{col 23}{res}{space 2} 1.592913{col 35}{space 2}  .059748{col 46}{space 1}   12.41{col 55}{space 3}0.000{col 63}{space 4}  1.48001{col 76}{space 3} 1.714429
 {txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results i.quartile
 {res}
@@ -2394,6 +2412,7 @@ contains_genetic {c |}
 {txt}{space 12} {c |}
 {space 7}_cons {c |}{col 14}{res}{space 2} .6661743{col 26}{space 2} .0404911{col 37}{space 1}   -6.68{col 46}{space 3}0.000{col 54}{space 4}  .591358{col 67}{space 3}  .750456
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. logistic any_results start_year i.sponsor_class i.industry_collab i.us_gov_collab ib3.phase_cat i.terminated i.full_completion i.contains_drug i.contains_biological i.contains_device i.contains_diagnostic i.contains_radiation i.contains_combi_product i.contains_genetic i.contains_us_loc i.quartile, allbaselevels
 {res}
@@ -2478,8 +2497,9 @@ contains_combi_product {c |}
 {txt}{space 22} {c |}
 {space 17}_cons {c |}{col 24}{res}{space 2} .0001235{col 36}{space 2} .0040374{col 47}{space 1}   -0.28{col 56}{space 3}0.783{col 64}{space 4} 1.82e-32{col 77}{space 3} 8.39e+23
 {txt}{hline 23}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {res:_cons} estimates baseline odds{txt}.{p_end}
 
 {com}. 
 {txt}end of do-file
 
-{com}. exit, clear
+{com}. exit

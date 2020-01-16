@@ -1,0 +1,17 @@
+name: Notebook checks
+
+on: [push]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: Test notebooks are runnable and up-to-date
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Test
+      uses: docker://ebmdatalab/datalab-jupyter:python3.8.1
+      with:
+        # This awkward invocation is to get around the case where no
+        # tests are found, which has exit code of 5 in pytest
+        args: ./run_tests.sh

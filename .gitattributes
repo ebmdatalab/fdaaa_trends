@@ -1,0 +1,5 @@
+# Treat all text files without a CR (as we have Docker)
+* text eol=lf
+
+# Don't show notebook files when diffing in GitHub
+notebooks/**/*ipynb linguist-generated=true

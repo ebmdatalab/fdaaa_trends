@@ -15,6 +15,9 @@ RUN pip install --requirement /tmp/requirements.txt
 
 EXPOSE 8888
 
+# This is a custom ipython kernel that allows us to manipulate
+# `sys.path` in a consistent way between normal and pytest-with-nbval
+# invocations
 COPY config/kernel.json /tmp/
 RUN jupyter kernelspec install /tmp/ --user --name="python3"
 

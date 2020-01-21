@@ -9,4 +9,7 @@ RUN pip install --requirement /tmp/requirements.txt
 
 EXPOSE 8888
 
+COPY config/kernel.json /tmp/
+RUN jupyter kernelspec install /tmp/ --user --name="python3"
+
 CMD cd ${MAIN_PATH} && PYTHONPATH=${MAIN_PATH} jupyter lab --config=config/jupyter_notebook_config.py

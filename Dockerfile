@@ -1,4 +1,4 @@
-FROM ebmdatalab/datalab-jupyter:python3.8.1-a0c03278d897c5a5533c564dee5cb8ed9a2f4d12
+FROM ebmdatalab/datalab-jupyter:python3.8.1-b61e03bc3e71a620ccd5135ef7ed5bc3db197406
 
 # Set up jupyter environment
 ENV MAIN_PATH=/home/app/notebook

@@ -28,6 +28,7 @@ try:
 except NameError:
     from tqdm import tqdm
 
+#This makes it so you can run the Notebook within the directory even without Docker
 cwd = os.getcwd()
 parent = str(Path(cwd).parents[0])
 sys.path.append(parent)

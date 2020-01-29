@@ -24,7 +24,7 @@ import sys
 
 try:
     get_ipython
-    from tqdm import tqdm_notebook as tqdm
+    from tqdm.notebook import tqdm
     %load_ext autoreload
     %autoreload 2
 except NameError:

@@ -24,12 +24,13 @@ import sys
 
 try:
     get_ipython
-    from tqdm import tqdm_notebook as tqdm
+    from tqdm.notebook import tqdm
     %load_ext autoreload
     %autoreload 2
 except NameError:
     from tqdm import tqdm
 
+#This makes it so you can run the Notebook within the directory even without Docker    
 cwd = os.getcwd()
 parent = str(Path(cwd).parents[0])
 sys.path.append(parent)

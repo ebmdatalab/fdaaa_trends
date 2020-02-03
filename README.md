@@ -1,3 +1,6 @@
+![status](https://github.com/ebmdatalab/fdaaa_trends/workflows/Notebook%20checks/badge.svg)
+
+
 Raw data files available at: https://osf.io/x8nbv/?view_only=bb862b2519224d2b92d5f166d290103b
 
 You process these using the "Raw Data Processing" directory. These then produce the processed CSVs. The processed CSVs used in this specific analysis are available in the "Processed CSVs" directory.
@@ -25,3 +28,23 @@ https://github.com/ebmdatalab/clinicaltrials-act-tracker
 https://github.com/ebmdatalab/clinicaltrials-act-converter
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3603491.svg)](https://doi.org/10.5281/zenodo.3603491)
+
+
+## How to view the notebooks
+
+Notebooks live in the `notebooks/` folder (with an `ipynb`
+extension). You can most easily view them [on
+nbviewer](https://nbviewer.jupyter.org/github/ebmdatalab/fdaaa_trends/tree/master/notebooks/),
+though looking at them in Github should also work.
+
+You can view *and interact* with any notebooks in the `notebooks/`
+folder by launching the notebook in the free online service,
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ebmdatalab/fdaaa_trends/master).
+
+Any changes you make there won't be saved; to do development work,
+you'll need to set up a local jupyter server and git repository - see
+`DEVELOPERS.md` for more detail.
+
+## How to cite
+
+XXX

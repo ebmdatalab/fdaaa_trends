@@ -1,4 +1,4 @@
-# Data Processing and Analsis Code for Reporting Trends on ClinicalTrials.gov
+# Data Processing and Analsis Code for Results Reporting Trends on ClinicalTrials.gov under FDAAA 2007
 
 ![status](https://github.com/ebmdatalab/fdaaa_trends/workflows/Notebook%20checks/badge.svg)
 

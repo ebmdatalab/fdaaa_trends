@@ -60,9 +60,9 @@ The repository has also been set up to run in Docker to ensure a compatible envi
 
 You can cite our Lancet Paper as:
 
-DeVito NJ, Bacon S, Goldacre B. Compliance with legal requirement to report clinical trial results on ClinicalTrials.gov: a cohort study. Lancet 2020; 395: 361–9.
+>DeVito NJ, Bacon S, Goldacre B. Compliance with legal requirement to report clinical trial results on ClinicalTrials.gov: a cohort study. Lancet 2020; 395: 361–9.
 
-You can cite our code via Zenodo 
+You can cite our code via Zenodo: 
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3603491.svg)](https://doi.org/10.5281/zenodo.3603491)
 

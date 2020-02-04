@@ -1,4 +1,4 @@
-# Data Processing and Analsis Code for Results Reporting Trends on ClinicalTrials.gov under FDAAA 2007
+# Data Processing and Analysis Code for Results Reporting Trends on ClinicalTrials.gov under FDAAA 2007
 
 ![status](https://github.com/ebmdatalab/fdaaa_trends/workflows/Notebook%20checks/badge.svg)
 
@@ -8,9 +8,9 @@ This repository contains everything you need to recreate our analysis published 
 
 ## Data Sources
 
-Each working day we download the full data from ClinicalTrials.gov as part of our [FDAAA TrialsTracker](https://fdaaa.trialstracker.net/) project. The data is [available in XML format](https://clinicaltrials.gov/ct2/resources/download) that we concert to JSON strings. We store these in CSV format, delimited by the `þ` character for ease of use with tools like BigQuery, however they are also able to be parsed as ndjson files. The code for that downloading and processing is located as part of our TrialsTracker ["clinicaltrials-act-converter" repo](https://github.com/ebmdatalab/clinicaltrials-act-converter). Additional code for the FDAAA TrialsTracker is located [here](https://github.com/ebmdatalab/clinicaltrials-act-tracker).
+Each working day we download the full data from ClinicalTrials.gov as part of our [FDAAA TrialsTracker](https://fdaaa.trialstracker.net/) project. The data is [available in XML format](https://clinicaltrials.gov/ct2/resources/download) that we convert to JSON strings. We store these in CSV format, delimited by the `þ` character for ease of use with tools like BigQuery, however they are also able to be parsed as ndjson files. The code for that downloading and processing is located as part of our TrialsTracker ["clinicaltrials-act-converter" repo](https://github.com/ebmdatalab/clinicaltrials-act-converter). Additional code for the FDAAA TrialsTracker is located [here](https://github.com/ebmdatalab/clinicaltrials-act-tracker).
 
-Adapting the code used to identify applicable trials for the TrialsTracker, we are able to take the raw data of the entirety of ClinicalTrials.gov on a given day and convert it to CSVs with the relevant data necessary for the analysis. Due to their size, the raw "CSV" files that underly this analysis are available seperately in an open [OSF repository](https://doi.org/10.17605/OSF.IO/X8NBV). We are happy to freely share any additonal full archives of ClinicalTrials.gov from our database. Please email us at [ebmdatalab@phc.ox.ac.uk](mailto:ebmdatalab@phc.ox.ac.uk) and we can discuss the best way to get you the data.
+Adapting the code used to identify applicable trials for the TrialsTracker, we are able to take the raw data of the entirety of ClinicalTrials.gov on a given day and convert it to CSVs with the relevant data necessary for the analysis. Due to their size, the raw "CSV" files that inform this analysis are available separately in an open [OSF repository](https://doi.org/10.17605/OSF.IO/X8NBV). We are happy to freely share any additional full archives of ClinicalTrials.gov from our database. Please email us at [ebmdatalab@phc.ox.ac.uk](mailto:ebmdatalab@phc.ox.ac.uk) and we can discuss the best way to get you the data.
 
 ## Data Processing and Analysis
 
@@ -20,7 +20,7 @@ Each raw data file used for this analysis is processed using the code in the `Ra
 
 ### *STATA Analysis*
 
-Similarly, the `STATA Analysis` directory contains seperate processing code that extracts only the data necessary for the statistical analysis conducted in STATA along with our .do file and additional STATA output and log files.
+Similarly, the `STATA Analysis` directory contains separate processing code that extracts only the data necessary for the statistical analysis conducted in STATA along with our .do file and additional STATA output and log files.
 
 ### *notebooks*
 
@@ -28,7 +28,7 @@ The `notebooks` directory contains all the remaining primary analysis code and r
 
 ### *Figures*
 
-All figures ouputted from the `FDAAA Trends Noteboook - Final.ipynb` notebook are available in the `Figures` directory in vector (.svg and .eps) formats.
+All figures from the `FDAAA Trends Notebook - Final.ipynb` notebook are available in the `Figures` directory in vector (.svg and .eps) formats.
 
 ### *Peer Review Additions*
 
@@ -42,7 +42,7 @@ The `Programs` directory contains .py files with functions to import for the pro
 
 The main directory also contains additional files necessary for both the raw data processing and the overall analysis:
 
-`fdaaa_regulatory_snapshot.csv` is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identificaiton logic. This data is taken from the 5 January 2017 archive of ClinicalTrials.gov available from the [Clinical Trials Transformation Initiative](https://aact.ctti-clinicaltrials.org/snapshots).
+`fdaaa_regulatory_snapshot.csv` is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identification logic. This data is taken from the 5 January 2017 archive of ClinicalTrials.gov available from the [Clinical Trials Transformation Initiative](https://aact.ctti-clinicaltrials.org/snapshots).
 
 `qa.csv` is our scrape of QC data used for QC data prior to it being made available in the public XML data.
 

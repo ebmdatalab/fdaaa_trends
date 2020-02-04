@@ -14,31 +14,31 @@ Adapting the code used to identify applicable trials for the TrialsTracker, we a
 
 ## Data Processing and Analysis
 
-*Raw Data Processing*
+### *Raw Data Processing*
 
 Each raw data file used for this analysis is processed using the code in the `Raw Data Processing` directory. This code takes one of our CSVs of JSON as an input and extracts the necessary data fields to identify ACTs/pACTs and any additional data needed for the analysis to a CSV. The processed data files for this analysis are available both in the `Processed CSVs` directory of this repository as well as our [OSF](https://doi.org/10.17605/OSF.IO/X8NBV) page.
 
-*STATA Analysis*
+### *STATA Analysis*
 
 Similarly, the `STATA Analysis` directory contains seperate processing code that extracts only the data necessary for the statistical analysis conducted in STATA along with our .do file and additional STATA output and log files.
 
-*notebooks*
+### *notebooks*
 
 The `notebooks` directory contains all the remaining primary analysis code and results for this project in the `FDAAA Trends Noteboook - Final.ipynb` notebook.
 
-*Figures*
+### *Figures*
 
 All figures ouputted from the `FDAAA Trends Noteboook - Final.ipynb` notebook are available in the `Figures` directory in vector (.svg and .eps) formats.
 
-*Peer Review Additions*
+### *Peer Review Additions*
 
 `Peer Review Additions` contains some additional statistics and analysis that were added to the paper at the request of peer reviewers.
 
-*Programs*
+### *Programs*
 
 The `Programs` directory contains .py files with functions to import for the processing and analysis of the data.
 
-*Additional Data Files*
+### *Additional Data Files*
 
 The main directory also contains additional files necessary for both the raw data processing and the overall analysis:
 
@@ -66,4 +66,4 @@ You can cite our code via Zenodo
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3603491.svg)](https://doi.org/10.5281/zenodo.3603491)
 
-Please note, the version of the repository at this DOI on Zenodo is the version as it stood at publication of the paper. All data and analysis code remains unchanged compared to this repository, however non-analysis portions of the code may have been updated or refactored, the structure of the directory may have changd, and Docker compatibility has been added.
+Please note, the version of the repository at this DOI on Zenodo is the version as it stood at publication of the paper. All data and analysis code remains unchanged compared to this repository, however non-analysis portions of the code may have been updated or refactored, the structure of the directory may have changed, and Docker compatibility has been added.

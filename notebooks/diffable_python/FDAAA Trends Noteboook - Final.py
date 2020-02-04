@@ -27,11 +27,19 @@ from lifelines import KaplanMeierFitter
 #from lifelines.plotting import add_at_risk_counts
 #this version of lifelines has some formatting issues with adding "At Risk Counts". 
 #This was manually patched and imported below in the Survival Analysis section.
-# -
+
+# +
+#this allows the notebook to work within the directory without Docker
+import sys
+from pathlib import Path
+cwd = os.getcwd()
+parent = str(Path(cwd).parents[0])
+sys.path.append(parent)
 
 # %matplotlib inline
 # %load_ext autoreload
 # %autoreload 2
+# -
 
 # # Inclusion Criteria
 #
@@ -496,9 +504,5 @@ print('Median time to report for Industry: {} days'.format(kmf_non_ind_due.media
 add_at_risk_counts(12, kmf_ind_due, kmf_non_ind_due)
 
 # +
-# #Watermark for module versions
-# # %load_ext watermark
-# # %watermark  -v -p pandas,numpy,matplotlib,lifelines,plotly
-# -
 
 

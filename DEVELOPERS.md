@@ -30,13 +30,6 @@ extension). You can most easily view them [on
 nbviewer](https://nbviewer.jupyter.org/github/ebmdatalab/seb-docker-test/tree/master/notebooks/),
 though looking at them in Github should also work.
 
-You can view *and interact* with any notebooks in the `notebooks/`
-folder by launching the notebook in the free online service,
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ebmdatalab/custom-docker/master).
-
-Any changes you make there won't be saved; to do development work,
-you'll need to set up a local jupyter server and git repository.
-
 ## Structure of repo
 
 Each repo will have this basic folder structure. For more information, please see our [Open Analytics Manifesto](https://docs.google.com/document/d/1LD5hVjFOWx1AptbXkdTS135ureLkxd8kCumgl8mxzaA/)

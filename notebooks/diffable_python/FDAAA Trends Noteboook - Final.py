@@ -93,7 +93,7 @@ fig = go.Figure(data=[go.Sankey(
   ))])
 
 fig
-#fig.write_image("sankey.svg")
+#fig.write_image(parent + "/Figures/sankey.svg")
 # -
 
 # # Trends
@@ -201,7 +201,7 @@ plt.ylabel('# of Overdue Trials', fontsize=25, labelpad=10)
 
 ax.set_zorder(ax2.get_zorder()+1)
 ax.patch.set_visible(False)
-#plt.savefig('figure_2.svg', dpi=300)
+#plt.savefig(parent + '/Figures/figure_2.svg', dpi=300)
 # -
 
 # # Ranked Sponsors
@@ -384,7 +384,7 @@ plt.xlabel('Days From Due Date', labelpad=4, fontsize=14)
 ax3.legend(fontsize = 12)
 
 add_at_risk_counts(10, kmf_ind_due, kmf_non_ind_due, position=-.1)
-#plt.savefig('figure_1.svg', dpi=300)
+#plt.savefig(parent + '/Figures/figure_1.svg', dpi=300)
 
 print('Median time to report: {} days'.format(kmf_overall.median_survival_time_))
 
@@ -417,7 +417,7 @@ leg = [leg_1, leg_2]
 leg_lab = ['Due Date', 'Censored']
 
 plt.legend(leg, leg_lab, fontsize=20)
-#plt.savefig('survival_with_censor.png')
+#plt.savefig(parent + '/Figures/survival_with_censor.png')
 # -
 
 #This provides the values for the 95% CI at the median

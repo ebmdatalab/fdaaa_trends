@@ -1,12 +1,14 @@
 # ---
 # jupyter:
 #   jupytext:
+#     cell_metadata_filter: all
 #     formats: ipynb,py:light
+#     notebook_metadata_filter: all,-language_info
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -37,8 +39,9 @@ sys.path.append(parent)
 from programs.data_functions import fda_reg
 from programs.data_functions import get_data
 
-old_fda = 'C:/Users/ndevito/Dropbox/Python projects/FDAAA Projects/FDAAA Trends Paper/fdaaa_regulatory_snapshot.csv'
-path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
+old_fda = parent + '/Data/fdaaa_regulatory_snapshot.csv'
+#You can get the raw data here from our OSF page and put it in the Data folder at https://osf.io/x8nbv/
+path = parent + '/Data/Put Raw Data Here/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
 
 fda_reg_dict = fda_reg(old_fda)
 lines = get_data(path)

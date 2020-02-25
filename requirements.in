@@ -20,3 +20,4 @@ ipywidgets
 
 # Add extra per-notebook packages here
 lifelines
+tqdm

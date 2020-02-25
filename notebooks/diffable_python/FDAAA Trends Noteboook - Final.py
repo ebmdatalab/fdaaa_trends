@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.3.2
+#       jupytext_version: 1.3.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -50,9 +50,7 @@ sys.path.append(parent)
 # The Sankey diagram is included in the Appendix of the publication.
 
 # +
-path = os.path.dirname(os.getcwd())
-
-inc = pd.read_csv(path+'/Processed CSVs/applicable_trials_2019-09-16.csv')
+inc = pd.read_csv(parent+'/Data/Processed CSVs/applicable_trials_2019-09-16.csv')
 inc['due_date'] = pd.to_datetime(inc.due_date)
 
 all_ctgov = 316342 #taken from raw data
@@ -119,7 +117,7 @@ reporting_prcts = []
 overdue_by_month = []
 
 #QA data manually scraped for due trials before this data was included in the ClinicalTrials.gov XML in May 2018.
-qa = pd.read_csv(path+'/qa.csv')
+qa = pd.read_csv(parent+'/Data/qa.csv')
 qa.submitted_to_regulator = pd.to_datetime(qa['submitted_to_regulator'])
 grouped = qa.groupby(['registry_id']).min()
 
@@ -130,7 +128,7 @@ scrape_dates = [date(2018,3,15), date(2018,4,16), date(2018,5,15), date(2018,6,1
                 date(2019,8,15), date(2019,9,16)]
 
 #Location of previously processed CSVs.
-path2 = path+'/Processed CSVs' #processed files should be here or edit as appropriate to point to their local location
+path2 = parent +'/Data/Processed CSVs' #processed files should be here or edit as appropriate to point to their local location
 files = os.listdir(path2)
 files.sort()
 
@@ -213,7 +211,7 @@ ax.patch.set_visible(False)
 # The creates Table 4 in the paper as well as the larger appendix
 
 # +
-df = pd.read_csv(path+'/Processed CSVs/applicable_trials_2019-09-16.csv')
+df = pd.read_csv(parent+'/Data/Processed CSVs/applicable_trials_2019-09-16.csv')
 
 
 #Pulling only the data we need with and indicator for "Reported Late"
@@ -262,7 +260,7 @@ sponsors.head()
 #Data Handling and Processing
 
 #reading in the processed data for just 16 September 2019
-df = pd.read_csv(path+'/Processed CSVs/applicable_trials_2019-09-16.csv')
+df = pd.read_csv(parent+'/Data/Processed CSVs/applicable_trials_2019-09-16.csv')
 
 #Taking only columns needed
 reporting_surv = df[['nct_id', 'results_due', 'has_results', 'pending_results', 'due_date', 'available_completion_date', 
@@ -272,7 +270,7 @@ reporting_surv = df[['nct_id', 'results_due', 'has_results', 'pending_results', 
 #Denotes if a trial has reported whether QC has been completed or not
 reporting_surv['reported'] = np.where(((reporting_surv.has_results==1) | (reporting_surv.pending_results ==1)), 1, 0)
 #Static column for the fixed date the data was pulled
-reporting_surv['scrape_date'] = pd.datetime(2019,9,16)
+reporting_surv['scrape_date'] = pd.Timestamp(2019,9,16)
 
 #Getting dates into date format
 reporting_surv['due_date'] = pd.to_datetime(reporting_surv['due_date'], format = '%Y-%m-%d')
@@ -502,7 +500,7 @@ print('Median time to report for Industry: {} days'.format(kmf_ind_due.median_su
 print('Median time to report for Industry: {} days'.format(kmf_non_ind_due.median_survival_time_))
 
 add_at_risk_counts(12, kmf_ind_due, kmf_non_ind_due)
+# -
 
-# +
 
 

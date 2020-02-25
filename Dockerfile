@@ -1,16 +1,12 @@
-FROM ebmdatalab/datalab-jupyter:python3.8.1-b61e03bc3e71a620ccd5135ef7ed5bc3db197406
+FROM ebmdatalab/datalab-jupyter:python3.8.1-2328e31e7391a127fe7184dcce38d581a17b1fa5
 
 # Set up jupyter environment
 ENV MAIN_PATH=/home/app/notebook
 
 # Install pip requirements
 COPY requirements.txt /tmp/
-
 # Hack until this is fixed https://github.com/jazzband/pip-tools/issues/823
-USER root
 RUN chmod 644 /tmp/requirements.txt
-USER app
-
 RUN pip install --requirement /tmp/requirements.txt
 
 EXPOSE 8888

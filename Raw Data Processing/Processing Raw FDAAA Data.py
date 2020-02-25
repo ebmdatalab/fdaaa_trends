@@ -1,12 +1,14 @@
 # ---
 # jupyter:
 #   jupytext:
+#     cell_metadata_filter: all
 #     formats: ipynb,py:light
+#     notebook_metadata_filter: all,-language_info
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -36,13 +38,13 @@ parent = str(Path(cwd).parents[0])
 sys.path.append(parent)
 # -
 
-from programs.data_functions import get_data
-from programs.data_functions import fda_reg
-from programs.final_df import make_dataframe
+from lib.data_functions import get_data
+from lib.data_functions import fda_reg
+from lib.final_df import make_dataframe
 
 # +
 #point to path of this included file as necessary
-old_fda = 'fdaaa_regulatory_snapshot.csv'
+old_fda = parent + '/data/fdaaa_regulatory_snapshot.csv'
 fda_reg_dict = fda_reg(old_fda)
 
 headers = ['nct_id', 'act_flag', 'included_pact_flag', 'results_due', 'has_results','pending_results', 'pending_data',
@@ -62,9 +64,10 @@ scrape_dates = [date(2018,3,15), date(2018,4,16), date(2018,5,15), date(2018,6,1
 
 regexp = re.compile('\d{4}-\d{2}-\d{2}')
 
-#These paths need to point to the raw ClinicalTrials.gov data for the relevant dates. These files are 3-4 GB in size and
-#therefore cannot easily be shared. They are available at https://osf.io/x8nbv/?view_only=bb862b2519224d2b92d5f166d290103b
-path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON' #change this to the appropriate path on your system
+#These paths need to point to the raw ClinicalTrials.gov data for the relevant dates. 
+#These files are 3-4 GB in size and therefore we exclude them from the directory. 
+#They are available at https://osf.io/x8nbv/ and you can add them to the Data folder
+path = parent + '/data/Put Raw Data Here'
 files = os.listdir(path)
 files.sort()
 
@@ -78,7 +81,7 @@ for file, scrape_date in zip(tqdm(files), scrape_dates):
     name = re.findall(regexp,file)[0]
     lines = get_data(os.path.join(path, file))
     df = make_dataframe(tqdm(lines), fda_reg_dict, headers, act_filter=False, scrape_date=scrape_date)
-    df.to_csv('applicable_trials_' + name + '.csv')  
+    df.to_csv(parent + '/data/Processed CSVs/applicable_trials_' + name + '.csv')  
 end_program = time()
 print("This took {} Minutes to Run".format((end_program - start_program) / 60))
 # -

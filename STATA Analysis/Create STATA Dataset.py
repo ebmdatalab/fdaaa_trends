@@ -1,12 +1,14 @@
 # ---
 # jupyter:
 #   jupytext:
+#     cell_metadata_filter: all
 #     formats: ipynb,py:light
+#     notebook_metadata_filter: all,-language_info
 #     text_representation:
 #       extension: .py
 #       format_name: light
-#       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       format_version: '1.5'
+#       jupytext_version: 1.3.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -34,11 +36,12 @@ parent = str(Path(cwd).parents[0])
 sys.path.append(parent)
 
 # +
-from programs.data_functions import fda_reg
-from programs.data_functions import get_data
+from lib.data_functions import fda_reg
+from lib.data_functions import get_data
 
-old_fda = 'C:/Users/ndevito/Dropbox/Python projects/FDAAA Projects/FDAAA Trends Paper/fdaaa_regulatory_snapshot.csv'
-path = 'C:/Users/ndevito/Desktop/FDAAA Implementation Data/Raw JSON/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
+old_fda = parent + '/data/fdaaa_regulatory_snapshot.csv'
+#You can get the raw data here from our OSF page and put it in the Data folder at https://osf.io/x8nbv/
+path = parent + '/data/Put Raw Data Here/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
 
 fda_reg_dict = fda_reg(old_fda)
 lines = get_data(path)
@@ -50,8 +53,8 @@ headers = ['nct_id', 'results_due', 'has_results', 'pending_results', 'any_resul
           'contains_combi_product', 'contains_genetic', 'contains_us_loc', 'act_flag', 'included_pact_flag']
 # -
 
-from programs.make_stata_data import make_row
-from programs.make_stata_data import make_dataframe
+from lib.make_stata_data import make_row
+from lib.make_stata_data import make_dataframe
 
 df = make_dataframe(tqdm(lines), fda_reg_dict, headers, act_filter = False, scrape_date = date(2019,9,16))
 

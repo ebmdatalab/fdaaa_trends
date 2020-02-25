@@ -1,7 +1,5 @@
 # EBM DataLab's default notebook environment
 
-![status](https://github.com/ebmdatalab/custom-docker/workflows/Notebook%20checks/badge.svg)
-
 This is a skeleton project for creating a reproducible, cross-platform
 analysis notebook, using Docker.  It also includes:
 
@@ -13,29 +11,35 @@ analysis notebook, using Docker.  It also includes:
 
 To get started, [create a new
 repository](https://github.com/organizations/ebmdatalab/repositories/new)
-using this repo as a template, and clone it to your local machine.
+using this repo as a template, and clone it to your local machine. You can do this by clicking template in the drop down menu. 
+
+![Alt Text](https://i.ibb.co/KqKZJWk/New-Repo.png)
 
 Your new repo's name should end with `-notebook`, to make it clear what it
 is.
 
-Then replace this front matter with information about your project. You should:
-   1.  keep the rest of the contents to help other users of this package
-   2.  keep the status badge at the top, changing
-     `custom-docker` to the name of your repo
-   3. edit the URL of the "quick start" button and the "nbviewer"
-     link below to match the name of your new repo
+Then replace the front matter in the [`README`](README.md) with
+information about your project. You should:
+
+   1. Add general context: what is the purpose of the notebook? Who is it aimed at? What are the data sources?
+   2. Give specific signposts to things that might be harder to understand
+   3. Keep the rest of the contents to help other users of this package
+   4. Search-and-replace `<repo>` with your repo name; both in this doc, and the README.
 
 Notebooks live in the `notebooks/` folder (with an `ipynb`
 extension). You can most easily view them [on
-nbviewer](https://nbviewer.jupyter.org/github/ebmdatalab/seb-docker-test/tree/master/notebooks/),
+nbviewer](https://nbviewer.jupyter.org/github/ebmdatalab/<repo>/tree/master/notebooks/),
 though looking at them in Github should also work.
+
+To do development work, you'll need to set up a local jupyter server
+and git repository.
 
 ## Structure of repo
 
 Each repo will have this basic folder structure. For more information, please see our [Open Analytics Manifesto](https://docs.google.com/document/d/1LD5hVjFOWx1AptbXkdTS135ureLkxd8kCumgl8mxzaA/)
 
 ```bash
-├── code
+├── lib
 │   └── custom_functions.py
 ├── config
 │   └── jupyter_notebook_config
@@ -48,8 +52,8 @@ Each repo will have this basic folder structure. For more information, please se
 ├── README.md
 ├── requirements.in
 ├── requirements.txt
-├── run.bat
-├── run.sh
+├── run.exe
+├── run.py
 └── run_tests.sh
 
 ```
@@ -96,18 +100,30 @@ instructions](https://github.com/docker/for-win/issues/785#issuecomment-34480518
 #### Start notebook
 
 The first time you do this, it may take some time, as the (large) base
-Docker image must be downloaded. On Linux or OS X:
-
-    ./run.sh
-
-On Windows, double-click `run.bat`.
+Docker image must be downloaded. On Linux or OS X, run `python3
+run.py`. On Windows, double-click `run.exe`.
 
 This will start a Jupyter Lab server in a Docker container. You will
 be able to access this in your web browser at http://localhost:8888/.
 Changes made in the Docker container will appear in your own
-filesystem, and can be committed as usual.
+filesystem, and can be committed as usual. If you would like to have two 
+or more Docker projects going on at the same time, please follow the instructions
+[here](https://github.com/ebmdatalab/custom-docker/issues/15).
+
+#### Stop notebook
+
+
+- To close down the Docker container, press Ctrl-C in the Docker command window, then "y".
+- If a container is running in the background (e.g. you're trying to start a new one and get an error because the port is already taken), go to Powershell/command line and type `docker ps`.
+- Each will have a name consisting of two random words. To close one, type `docker stop [name]`
+- To close down the Docker container, press Ctrl-C in the Docker command window. Normally, this is all you need to do. However, sometimes containers are not stopped correctly (for example if there is an error during startup). To check, and/or halt the container:
+    - Go to Powershell/command line and type `docker ps`. This will show all running docker containers, including "hidden" ones running in the background
+    - Each will have a name consisting of two random words. To close one, type `docker stop [name]`
+
 
 ### Running without Docker
+
+#### Linux / OSX
 
 If you want to execute notebooks without Docker, set up a [virtual
 environment](https://docs.python.org/3/tutorial/venv.html) for the
@@ -131,6 +147,24 @@ Finally, run jupyter in the same way it's started in the Docker image:
 
     PYTHONPATH=$(pwd) jupyter notebook --config=config/jupyter_notebook_config.py
 
+#### Windows
+
+The story with native Windows development is messy, because some
+packages are only available via `conda`, and others only via `pip`,
+and switching virtual environments is hard. However, if you *must* do
+it this way, the following instructions may help.
+
+Assuming you are using Anaconda - don't use the Jupyter Notebook
+shortcut to start your notebook; instead, ensure the required packages
+are installed and then start it from a prompt:
+
+* Open an anaconda prompt
+* type `cd <location_of_repo_checkout>` (e.g. `cd C:\Users\yourusername\Documents\Github\mynotebook`)
+* activate/create `conda environment` (you're on your own here)
+  * `conda install pip geopandas`
+  * `pip install -r requirements.txt`
+  * at a minimum you need to install jupytext, which you can do with `conda install pip geopandas` and then `pip install jupytext`
+* Type `jupyter notebook  --config=config\jupyter_notebook_config.py`
 
 ## Development best practices
 
@@ -165,10 +199,10 @@ individual packages in a sane way, we use
 
 The workflow is:
 
-* When you want to install a new package, add it to `requirements.in`
-* Run `pip-compile` to generate a `requirements.txt` based on that file
-* Run `pip-sync` to ensure your installed packages exactly match those in `requirements.txt`
-* Commit both `requirements.in` and `requirements.txt` to your git repo
+1. When you want to install a new package, add it to `requirements.in`
+2. Run `pip-compile` to generate a `requirements.txt` based on that file
+3. Run `pip-sync` to ensure your installed packages exactly match those in `requirements.txt`
+4. Commit both `requirements.in` and `requirements.txt` to your git repo
 
 To *upgrade* a specific package:
 
@@ -181,12 +215,20 @@ To upgrade everything:
 Don't forget to run `pip-sync` after running
 any upgrade command.
 
-To execute these within your dockerised environment, start a new Bash
-console in Jupyter Lab (from the same menu you would create a new
-notebook).
+To execute these within your dockerised environment, you can either
 
-You can then run whatever shell commands you like, by typing them and
-hitting Shift + Enter to execute.
+* Prepend them with an exclamation mark in a notebook cell, e.g. `!pip-compile ../requirements.in && pip-sync ../requirements.txt`; or
+* start a new Bash console in Jupyter Lab (from the same menu you would create a new notebook).  You can then run whatever shell commands you like, by typing them and hitting Shift + Enter to execute:
+
+This is the Bash Console:
+![Alt Text](https://i.ibb.co/JsCYXsG/bash-console.png)
+
+It acts like the command line:
+![Alt Text](https://i.ibb.co/tPN9hfg/bash-command.png)
+
+As you can see now `requirements.txt` has been updated:
+![Alt Text](https://i.ibb.co/Qr4WNnG/bash-sync.png)
+
 
 ### Testing
 
@@ -197,6 +239,39 @@ notebook.  We assert this using the
 plugin, which we have set up as a Github Actions workflow (see the
 `.github/` folder). Any other pytest-style tests found are also run as
 part of this workflow.
+
+#### Gotchas
+
+* A common failure mode is where tests can't complete because they are
+  asking for input - typically a login token or password for an
+  external data source. The correct fix in these cases is to provide a
+  cached CSV of the same data, or a synthetic version if the source
+  data is confidential; bnotebooks should be runnable by anyone,
+  including people without access to the source data.
+
+* We consider stderr (this is debug output, coloured red when running
+  a notebook interactively) to be irrelevant for checking cell output,
+  and don't compare it
+
+* We also don't compare plotly outputs, because they appear to differ
+  in subtle ways between test and interactive environments (perhaps
+  related to responsive sizing)
+
+* `nbval` has a mechanism to ignore certain differences based on
+  regular expressions. Our default config, in
+  `config/nbval_sanitize_file.conf`, does this for UUIDs and python
+  memory references.
+
+* There are some subtle differences between how notebook cells are
+  executed interactively, and how they are executed by the test
+  framework. Specifically, you may find that commands that execute
+  subprocesses combine stderr and stdout to a single stream. In this
+  case, if it's not possible to suppress the output of the subprocess,
+  you may need to ask the test runner to skip comparing cell outputs
+  when executing that cell, which can do by adding a magic comment `#
+  NBVAL_IGNORE_OUTPUT`. The problem is discussed at more length
+  [here](https://github.com/ebmdatalab/custom-docker/issues/100)
+
 
 ### Jupytext and diffing
 

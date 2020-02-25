@@ -16,7 +16,7 @@ Adapting the code used to identify applicable trials for the TrialsTracker, we a
 
 ### *Raw Data Processing*
 
-Each raw data file used for this analysis is processed using the code in the `Raw Data Processing` directory. This code takes one of our CSVs of JSON as an input and extracts the necessary data fields to identify ACTs/pACTs and any additional data needed for the analysis to a CSV. The processed data files for this analysis are available both in the `Processed CSVs` directory of this repository as well as our [OSF](https://doi.org/10.17605/OSF.IO/X8NBV) page.
+Each raw data file used for this analysis is processed using the code in the `Raw Data Processing` directory. This code takes one of our CSVs of JSON as an input and extracts the necessary data fields to identify ACTs/pACTs and any additional data needed for the analysis to a CSV. The processed data files for this analysis are available both in the `Processed CSVs` directory in the Data directory of this repository as well as our [OSF](https://doi.org/10.17605/OSF.IO/X8NBV) page.
 
 ### *STATA Analysis*
 
@@ -34,19 +34,19 @@ All figures from the `FDAAA Trends Notebook - Final.ipynb` notebook are availabl
 
 `Peer Review Additions` contains some additional statistics and analysis that were added to the paper at the request of peer reviewers.
 
-### *Programs*
+### *lib*
 
-The `Programs` directory contains .py files with functions to import for the processing and analysis of the data.
+The `lib` directory contains .py files with functions to import for the processing and analysis of the data including `lifelines_fix.py`  which cosmetically patches the `lifelines` module used for the survival analysis to better display at risk counts.
 
-### *Additional Data Files*
+### *Data*
 
-The main directory also contains additional files necessary for both the raw data processing and the overall analysis:
+Files necessary for both the raw data processing and the overall analysis:
 
-`fdaaa_regulatory_snapshot.csv` is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identification logic. This data is taken from the 5 January 2017 archive of ClinicalTrials.gov available from the [Clinical Trials Transformation Initiative](https://aact.ctti-clinicaltrials.org/snapshots).
+>`fdaaa_regulatory_snapshot.csv` is our archive of the old "is_fda_regulated" field from ClinicalTrials.gov used in our pACT identification logic. This data is taken from the 5 January 2017 archive of ClinicalTrials.gov available from the [Clinical Trials Transformation Initiative](https://aact.ctti-clinicaltrials.org/snapshots).
 
-`qa.csv` is our scrape of QC data used for QC data prior to it being made available in the public XML data.
+>`qa.csv` is our scrape of QC data used for QC data prior to it being made available in the public XML data.
 
-`lifelines_fix.py` cosmetically patches the `lifelines` module used for the survival analysis to better display at risk counts.
+>We also include a folder of the processsed CSV files `Processed CSVs` and a placeholder directory in which you can place the raw data from [here](https://doi.org/10.17605/OSF.IO/X8NBV)
 
 Additional files and directories in the repository are for use with Docker as described below.
 

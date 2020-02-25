@@ -36,12 +36,12 @@ parent = str(Path(cwd).parents[0])
 sys.path.append(parent)
 
 # +
-from programs.data_functions import fda_reg
-from programs.data_functions import get_data
+from lib.data_functions import fda_reg
+from lib.data_functions import get_data
 
-old_fda = parent + '/Data/fdaaa_regulatory_snapshot.csv'
+old_fda = parent + '/data/fdaaa_regulatory_snapshot.csv'
 #You can get the raw data here from our OSF page and put it in the Data folder at https://osf.io/x8nbv/
-path = parent + '/Data/Put Raw Data Here/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
+path = parent + '/data/Put Raw Data Here/clinicaltrials_raw_clincialtrials_json_2019-09-16.csv'
 
 fda_reg_dict = fda_reg(old_fda)
 lines = get_data(path)
@@ -53,8 +53,8 @@ headers = ['nct_id', 'results_due', 'has_results', 'pending_results', 'any_resul
           'contains_combi_product', 'contains_genetic', 'contains_us_loc', 'act_flag', 'included_pact_flag']
 # -
 
-from programs.make_stata_data import make_row
-from programs.make_stata_data import make_dataframe
+from lib.make_stata_data import make_row
+from lib.make_stata_data import make_dataframe
 
 df = make_dataframe(tqdm(lines), fda_reg_dict, headers, act_filter = False, scrape_date = date(2019,9,16))
 

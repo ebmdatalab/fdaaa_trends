@@ -34,9 +34,9 @@ All figures from the `FDAAA Trends Notebook - Final.ipynb` notebook are availabl
 
 `Peer Review Additions` contains some additional statistics and analysis that were added to the paper at the request of peer reviewers.
 
-### *Programs*
+### *lib*
 
-The `Programs` directory contains .py files with functions to import for the processing and analysis of the data.
+The `lib` directory contains .py files with functions to import for the processing and analysis of the data including `lifelines_fix.py`  which cosmetically patches the `lifelines` module used for the survival analysis to better display at risk counts.
 
 ### *Data*
 
@@ -47,10 +47,6 @@ Files necessary for both the raw data processing and the overall analysis:
 >`qa.csv` is our scrape of QC data used for QC data prior to it being made available in the public XML data.
 
 >We also include a folder of the processsed CSV files `Processed CSVs` and a placeholder directory in which you can place the raw data from [here](https://doi.org/10.17605/OSF.IO/X8NBV)
-
-### *Lifelines patch*
-
-`lifelines_fix.py` cosmetically patches the `lifelines` module used for the survival analysis to better display at risk counts.
 
 Additional files and directories in the repository are for use with Docker as described below.
 

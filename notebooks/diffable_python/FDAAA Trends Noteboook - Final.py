@@ -300,6 +300,9 @@ reporting_surv['duration_completion'] = np.where(reporting_surv['duration_comple
 #Looking at only trials that become overdue
 reporting_surv_due = reporting_surv[(reporting_surv.due_date < reporting_surv.first_results_submission_any) | 
                                     (reporting_surv.first_results_submission_any.isnull())]
+# -
+
+reporting_surv.head()
 
 # +
 #Checking the number of trials that first reported results prior to primary completion date as requested during peer review.

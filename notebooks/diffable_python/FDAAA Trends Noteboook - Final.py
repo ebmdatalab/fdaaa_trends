@@ -119,7 +119,7 @@ overdue_by_month = []
 #QA data manually scraped for due trials before this data was included in the ClinicalTrials.gov XML in May 2018.
 qa = pd.read_csv(parent+'/data/qa.csv')
 qa.submitted_to_regulator = pd.to_datetime(qa['submitted_to_regulator'])
-grouped = qa.groupby(['registry_id']).min()
+grouped = qa[['registry_id', 'submitted_to_regulator']].groupby(['registry_id']).min()
 
 #Dates of scrapes used, on or as close to mid-month available. Edit this as appropriate for dates of interest
 scrape_dates = [date(2018,3,15), date(2018,4,16), date(2018,5,15), date(2018,6,15), date(2018,7,16), date(2018,8,13), 
@@ -405,7 +405,7 @@ ax =  kmf_overall.plot(ci_show=False, show_censors=True, censor_styles={'ms':10,
 
 
 ax.axvline(x=364, color='grey', ls='--')
-plt.title("Time To Reporting From Primary Completion", pad=20, fontsize=20)
+plt.title("a. Time To Reporting From Primary Completion", pad=20, fontsize=20)
 plt.ylabel('Reporting', labelpad=10, fontsize=14)
 plt.xlabel('Days From Primary Completion Date', labelpad=10, fontsize=14)
 
@@ -462,7 +462,7 @@ ax = kmf_non_ind.plot(ci_show=True, yticks=yticks, figsize=(15,10), grid=True, a
 
 plt.ylabel('Cum. Unreported', labelpad=10, fontsize=14)
 plt.xlabel('Days From Primary Completions Date', labelpad=10, fontsize=14)
-plt.title('Time to Reporting from Primary Completion - Industry and Non-Industry Sponsors', pad=20, fontsize = 20)
+plt.title('b. Time to Reporting from Primary Completion - Industry and Non-Industry Sponsors', pad=20, fontsize = 20)
 
 ax.axvline(x=364, color='grey', ls='--', label = 'Due Date')
 ax.legend(fontsize = 20)
@@ -473,6 +473,7 @@ ax.tick_params(labelsize=15)
 plt.legend(fontsize=20)
 
 add_at_risk_counts(12, kmf_ind, kmf_non_ind)
+plt.show()
 
 # +
 #KM Curve for reporting after becoming overdue and unreported for Industry and Non-Industry. 
@@ -494,7 +495,7 @@ ax = kmf_non_ind_due.plot(ci_show=True, figsize=(15,10), grid=True, lw = 2.5, ax
 ax.spines['right'].set_visible(False)
 ax.spines['top'].set_visible(False)
 ax.tick_params(labelsize=15)
-plt.title("Time To Reporting for Overdue Trials - Industry and Non-Industry Sponsors", pad=20, fontsize = 18)
+plt.title("c. Time To Reporting for Overdue Trials - Industry and Non-Industry Sponsors", pad=20, fontsize = 18)
 plt.ylabel('Cum. Unreported', labelpad=10, fontsize=14)
 plt.xlabel('Days From Due Date', labelpad=10, fontsize=14)
 ax.legend(fontsize = 20)
@@ -503,5 +504,8 @@ print('Median time to report for Industry: {} days'.format(kmf_ind_due.median_su
 print('Median time to report for Industry: {} days'.format(kmf_non_ind_due.median_survival_time_))
 
 add_at_risk_counts(12, kmf_ind_due, kmf_non_ind_due)
+plt.show()
 # -
+
+
 
